@@ -21,3 +21,6 @@ CREATE TABLE questions (
     answer INT NOT NULL, # this is the option number
     PRIMARY KEY (questionNumber)
 );
+
+INSERT INTO boss VALUES (1, 0, "quiz");
+INSERT INTO boss VALUES (2, 0, "finlitquiz");
