@@ -14,8 +14,8 @@ CORS(app)
 class Region(db.Model):
     __tablename__ = 'region'
 
-    regionID = db.Column(db.Integer, primary_key=True)
-    spawnDate = db.Column(db.String(50), primary_key=True)
+    regionID = db.Column(db.Integer)
+    spawnDate = db.Column(db.String(50))
     regionName = db.Column(db.String(50), primary_key=True)
     Points = db.Column(db.Integer, nullable=False)
 
@@ -33,6 +33,10 @@ class Region(db.Model):
             "spawnDate": self.spawnDate
         }
         return region_entry
+    
+    def setSpawnDate(self, spawnDate):
+        self.spawnDate = spawnDate
+        return True
 
     
     
@@ -52,10 +56,6 @@ class regionMap(db.Model):
             "postalcode": self.postalcode
         }
         return region_entrymap
-
-    def set_Points(self, update):
-        self.Points = update
-        return True
     
 
 # method to retireve all region maps 
@@ -75,7 +75,20 @@ def getRegionMap(postalcode):
     else: 
         return jsonify(False), 404
 
+@app.route("/getSpawnDate/<string:regionName>", methods=["GET"])
+@cross_origin(supports_credentials=True)
+def getSpawnDate(regionName):        
+    records = Region.query.get(regionName)
+    return jsonify({"spawnDate" :records.spawnDate})
     
     
+@app.route ("/updateSpawnDate/<string:spawnDate>/<string:regionName>", methods=["PUT"])
+@cross_origin(supports_credentials=True)
+def updateSpawnDate(spawnDate, regionName):
+    records = Region.query.get(regionName)
+    records.setSpawnDate(spawnDate)
+    db.session.commit()
+    return jsonify(True)
+
 if __name__=='__main__':
     app.run(host='0.0.0.0',port=5004, debug=True)

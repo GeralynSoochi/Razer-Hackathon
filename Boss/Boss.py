@@ -67,8 +67,8 @@ class Questions(db.Model):
         }
         return questionInfo
 
-@app.route("/getBoss")
-def getBoss ():
+@app.route("/getMiniBoss")
+def getMiniBoss ():
     queryBosses = Boss.query.filter_by(bossType=0)
     bossesClass = []
     for boss in queryBosses: 
@@ -76,7 +76,21 @@ def getBoss ():
     boss = random.randrange(len(bossesClass))
     return jsonify(bossesClass[boss])
 
-@app.route ("/getQuestions")
+
+@app.route("/getMainBoss")
+def getMainBoss ():
+    queryBosses = Boss.query.filter_by(bossType=1)
+    bossesClass = []
+    for boss in queryBosses: 
+        bossesClass.append(boss.json())
+    boss = random.randrange(len(bossesClass))
+    if "quiz" in bossesClass[boss]['bossName']:
+        questions = getQuestions()
+        print (questions)
+        return jsonify(questions)
+    return jsonify(True)
+    # add on for the other mainbosses
+
 def getQuestions ():
     #get 6 question for the fight
     noQ = Questions.query.count()
@@ -88,9 +102,10 @@ def getQuestions ():
         numbers.add(no)
 
     questions = []
+    print (numbers)
     for num in numbers: 
         questions.append(Questions.query.filter_by(questionNumber = num).first().json())
-    return jsonify(questions)
+    return questions
 
 
 if __name__=='__main__':

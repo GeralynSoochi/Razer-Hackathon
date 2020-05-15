@@ -7,20 +7,31 @@ import requests
 
 app = Flask(__name__)
 
-@app.route("/getSpawnDates")
-def generateSpawnDate ():
-    if (date.today().weekday() == 4):
+@app.route("/getSpawnDate/<string:region>")
+def getSpawnDate (region):
+    if (date.today().weekday() == 6): # if sunday, spawn
         numbers = set([])
 
         for i in range (2): # spawn rate; change accordingly.
             genNo = random.randrange(6)
             while genNo in numbers: 
                 genNo = random.randrange(6)
-            numbers.add(genNo)
-    return jsonify(list(numbers))
+            numbers.add(str(genNo))
+        numbers = ",".join(list(numbers))
+        r = requests.put("http://localhost:5004/updateSpawnDate/" + numbers + "/" + region )
+        return jsonify(True)
+    else: 
+        r = requests.get("http://localhost:5004/getSpawnDate/" + region)
+        return jsonify(r.json())    
 
 @app.route("/miniBoss")
 def miniBoss():
+    r = requests.get("http://localhost:5003/getBoss")
+    return jsonify(r.json())
+
+    
+@app.route("/mainBoss")
+def mainBoss():
     r = requests.get("http://localhost:5003/getBoss")
     return jsonify(r.json())
 

@@ -6,10 +6,10 @@ USE region;
 
 CREATE TABLE region (
 	regionID INT NOT NULL,
-    regionName VARCHAR (5) NOT NULL,
+    regionName VARCHAR (7) NOT NULL,
     points INT NOT NULL,
     spawnDate CHAR(3),
-    PRIMARY KEY (regionID)
+    PRIMARY KEY (regionName)
 );
 
 CREATE TABLE regionMap (
