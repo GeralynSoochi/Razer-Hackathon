@@ -8,6 +8,96 @@ CREATE TABLE region (
 	regionID INT NOT NULL,
     regionName VARCHAR (5) NOT NULL,
     points INT NOT NULL,
-    spawnDate CHAR(8),
+    spawnDate CHAR(3),
     PRIMARY KEY (regionID)
 );
+
+CREATE TABLE regionMap (
+	regionID INT NOT NULL,
+    postalcode INT NOT NULL,
+    PRIMARY KEY (regionID, postalcode) 
+);
+
+INSERT INTO region VALUES (1, "North", 0, NULL);
+INSERT INTO region VALUES (2, "South", 0, NULL);
+INSERT INTO region VALUES (3, "East", 0, NULL);
+INSERT INTO region VALUES (4, "West", 0, NULL);
+INSERT INTO region VALUES (5, "Central", 0, NULL);
+INSERT INTO regionMap VALUES (1, 72);
+INSERT INTO regionMap VALUES (1, 73);
+INSERT INTO regionMap VALUES (1, 77);
+INSERT INTO regionMap VALUES (1, 78);
+INSERT INTO regionMap VALUES (1, 75);
+INSERT INTO regionMap VALUES (1, 76);
+INSERT INTO regionMap VALUES (1, 79);
+INSERT INTO regionMap VALUES (1, 80);
+INSERT INTO regionMap VALUES (2, 01);
+INSERT INTO regionMap VALUES (2, 02);
+INSERT INTO regionMap VALUES (2, 03);
+INSERT INTO regionMap VALUES (2, 04);
+INSERT INTO regionMap VALUES (2, 05);
+INSERT INTO regionMap VALUES (2, 06);
+INSERT INTO regionMap VALUES (2, 07);
+INSERT INTO regionMap VALUES (2, 08);
+INSERT INTO regionMap VALUES (2, 09);
+INSERT INTO regionMap VALUES (2, 10);
+INSERT INTO regionMap VALUES (2, 11);
+INSERT INTO regionMap VALUES (2, 12);
+INSERT INTO regionMap VALUES (2, 13);
+INSERT INTO regionMap VALUES (2, 14);
+INSERT INTO regionMap VALUES (2, 15);
+INSERT INTO regionMap VALUES (2, 16);
+INSERT INTO regionMap VALUES (2, 17);
+INSERT INTO regionMap VALUES (2, 18);
+INSERT INTO regionMap VALUES (2, 19);
+INSERT INTO regionMap VALUES (2, 20);
+INSERT INTO regionMap VALUES (2, 21);
+INSERT INTO regionMap VALUES (2, 22);
+INSERT INTO regionMap VALUES (2, 23);
+INSERT INTO regionMap VALUES (3, 38);
+INSERT INTO regionMap VALUES (3, 39);
+INSERT INTO regionMap VALUES (3, 40);
+INSERT INTO regionMap VALUES (3, 41);
+INSERT INTO regionMap VALUES (3, 42);
+INSERT INTO regionMap VALUES (3, 43);
+INSERT INTO regionMap VALUES (3, 44);
+INSERT INTO regionMap VALUES (3, 45);
+INSERT INTO regionMap VALUES (3, 46);
+INSERT INTO regionMap VALUES (3, 47);
+INSERT INTO regionMap VALUES (3, 48);
+INSERT INTO regionMap VALUES (3, 49);
+INSERT INTO regionMap VALUES (3, 50);
+INSERT INTO regionMap VALUES (3, 51);
+INSERT INTO regionMap VALUES (3, 52);
+INSERT INTO regionMap VALUES (3, 53);
+INSERT INTO regionMap VALUES (3, 54);
+INSERT INTO regionMap VALUES (3, 55);
+INSERT INTO regionMap VALUES (3, 82);
+INSERT INTO regionMap VALUES (3, 81);
+INSERT INTO regionMap VALUES (4, 60);
+INSERT INTO regionMap VALUES (4, 61);
+INSERT INTO regionMap VALUES (4, 62);
+INSERT INTO regionMap VALUES (4, 63);
+INSERT INTO regionMap VALUES (4, 64);
+INSERT INTO regionMap VALUES (4, 65);
+INSERT INTO regionMap VALUES (4, 66);
+INSERT INTO regionMap VALUES (4, 67);
+INSERT INTO regionMap VALUES (4, 68);
+INSERT INTO regionMap VALUES (4, 69);
+INSERT INTO regionMap VALUES (4, 70);
+INSERT INTO regionMap VALUES (4, 71);
+INSERT INTO regionMap VALUES (5, 28);
+INSERT INTO regionMap VALUES (5, 29);
+INSERT INTO regionMap VALUES (5, 30);
+INSERT INTO regionMap VALUES (5, 31);
+INSERT INTO regionMap VALUES (5, 32);
+INSERT INTO regionMap VALUES (5, 33);
+INSERT INTO regionMap VALUES (5, 34);
+INSERT INTO regionMap VALUES (5, 45);
+INSERT INTO regionMap VALUES (5, 46);
+INSERT INTO regionMap VALUES (5, 47);
+INSERT INTO regionMap VALUES (5, 56);
+INSERT INTO regionMap VALUES (5, 57);
+INSERT INTO regionMap VALUES (5, 58);
+INSERT INTO regionMap VALUES (5, 59);
+
