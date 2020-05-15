@@ -83,7 +83,7 @@ def get_all():
     return jsonify({"Customers": [customer.json() for customer in Customer.query.all()]})
 
 # retrieve a particular customer   
-@app.route("/getCustomer/<string:accountID>", methods=["GET"])
+@app.route("/getCustomer/<string:postalcode>", methods=["GET"])
 @cross_origin(supports_credentials=True)
 def getCustomer(accountID):
     All_CB = Customer.query.filter_by(accountID=accountID).all()
