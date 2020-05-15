@@ -6,56 +6,54 @@ import json
 
 # ==================================== CONNECTION SPECIFICATION ====================================== #
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:password@root:password@database-1.c9bzkzbvdsli.ap-southeast-1.rds.amazonaws.com:3306/customer'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:database-1.c9bzkzbvdsli.ap-southeast-1.rds.amazonaws.com:3306/customer'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 CORS(app)
 
 class Customer(db.Model):
-    __tablename__ = 'booking'
+    __tablename__ = 'customer'
 
-    name = db.Column(db.String(50), primary_key=True)
-    address = db.Column(db.String(50), nullable=False)
-    contactno = db.Column(db.String(50), nullable=True)
-    accountid = db.Column(db.Integer, nullable=True)
+    username = db.Column(db.String(50), primary_key=True)
+    password = db.Column(db.String(50), primary_key=True)
+    postalcode = db.Column(db.String(50), nullable=False)
+    accountid = db.Column(db.String(50), nullable=True)
 
-
-    def __init__(self, name, address, contactno, accountid):
-        self.name = name
-        self.address = address
-        self.contactno = contactno
+    def __init__(self, username,password ,postalcode, accountid):
+        self.username = username
+        self.postalcode = postalcode
+        self.password = password
         self.accountid = accountid
-
 
     def json(self):
         customer_entry = {
-            "name": self.name,
-            "address": self.address,
-            "contactno": self.contactno,
+            "username": self.username,
+            "password": self.password,
+            "postalcode": self.postalcode,
             "accountid": self.accountid
         }
         return customer_entry
 
-    def set_name(self, update):
-        self.name = update
+    def set_username(self, update):
+        self.username = update
         return True
     
-    def set_contactno(self, update):
-        self.contactno = update
-        return True
+    def set_password(self, update):
+        self.password = update
+        return True 
     
-    def set_address(self, update):
-        self.address = update
+    def set_postalcode(self, update):
+        self.postalcode = update
         return True
     
     
 class accCb(db.Model):
-    __tablename__ = 'Account'
+    __tablename__ = 'account'
 
     status = db.Column(db.String(50), primary_key=True)
     pendingcashback = db.Column(db.Float(2), nullable=True)
-    accountid = db.Column(db.Integer, nullable=True)
+    accountid = db.Column(db.String(50), nullable=True)
 
 
     def __init__(self, accountid, pendingcashback, status):
@@ -79,7 +77,6 @@ class accCb(db.Model):
         self.status = update
         return True
 
-
 # retrieve all customer 
 @app.route("/Customers", methods=['GET'])
 def get_all():
@@ -94,9 +91,11 @@ def getProducts(AccountID):
     return jsonify(Customer)
 
 # Creating a new Customer Record , not sure how the data gonna be passed 
+# rmb account id is created ussing UUID lmk who is doing this i can provide the code 
+
 
 #retreive a list of customer cashbacks
-@app.route("/allCustomerCashBack/<string:accountID>", methods=['GET'])
+@app.route("/allCustomerCashBack/<int:accountID>", methods=['GET'])
 @cross_origin(supports_credentials=True)
 def UserProductProgress(accountID):
     # print(username)
