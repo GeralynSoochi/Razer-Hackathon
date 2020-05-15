@@ -7,7 +7,7 @@ import json
 # ==================================== CONNECTION SPECIFICATION ====================================== #
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://admin:database-1.c9bzkzbvdsli.ap-southeast-1.rds.amazonaws.com:3306/rewards'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:password@root:password@database-1.c9bzkzbvdsli.ap-southeast-1.rds.amazonaws.com:3306/rewards'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
