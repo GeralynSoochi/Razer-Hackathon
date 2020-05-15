@@ -7,32 +7,36 @@ import requests
 
 app = Flask(__name__)
 
-@app.route("/getSpawnDate/<string:region>")
-def getSpawnDate (region):
-    if (date.today().weekday() == 6): # if sunday, spawn
-        numbers = set([])
-
-        for i in range (2): # spawn rate; change accordingly.
+#auto mate this to a weekly task
+@app.route("/genSpawnDate")
+def genSpawnDate ():
+    numbers = set([])
+    for i in range (2): # spawn rate; change accordingly.
+        genNo = random.randrange(6)
+        while genNo in numbers: 
             genNo = random.randrange(6)
-            while genNo in numbers: 
-                genNo = random.randrange(6)
-            numbers.add(str(genNo))
-        numbers = ",".join(list(numbers))
-        r = requests.put("http://localhost:5004/updateSpawnDate/" + numbers + "/" + region )
-        return jsonify(True)
-    else: 
-        r = requests.get("http://localhost:5004/getSpawnDate/" + region)
-        return jsonify(r.json())    
+        numbers.add(str(genNo))
+    numbers = ",".join(list(numbers))
+    r = requests.put("http://localhost:5004/updateSpawnDate/" + numbers )
+    return jsonify(True)
 
-@app.route("/miniBoss")
+@app.route("/getSpawnDate/<string:region>") 
+def getSpawnDate(region): 
+    r = requests.get("http://localhost:5004/getSpawnDate/" + region).json()
+    dates = set(r["spawnDate"].split(","))
+    if (date.today().weekday() in dates):
+        return jsonify(True)
+    return jsonify(False)
+
+@app.route("/getMiniBoss")
 def miniBoss():
-    r = requests.get("http://localhost:5003/getBoss")
+    r = requests.get("http://localhost:5003/getMiniBoss")
     return jsonify(r.json())
 
     
-@app.route("/mainBoss")
+@app.route("/getMainBoss")
 def mainBoss():
-    r = requests.get("http://localhost:5003/getBoss")
+    r = requests.get("http://localhost:5003/getMainBoss")
     return jsonify(r.json())
 
 if __name__=='__main__':
