@@ -6,7 +6,7 @@ import json
 
 # ==================================== CONNECTION SPECIFICATION ====================================== #
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:database-1.c9bzkzbvdsli.ap-southeast-1.rds.amazonaws.com:3306/customer'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:password@database-1.c9bzkzbvdsli.ap-southeast-1.rds.amazonaws.com:3306/customer'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -18,20 +18,20 @@ class Customer(db.Model):
     username = db.Column(db.String(50), primary_key=True)
     password = db.Column(db.String(50), primary_key=True)
     postalcode = db.Column(db.String(50), nullable=False)
-    accountid = db.Column(db.String(50), nullable=True)
+    accountID = db.Column(db.String(50), nullable=False)
 
-    def __init__(self, username,password ,postalcode, accountid):
+    def __init__(self, username,password ,postalcode, accountID):
         self.username = username
         self.postalcode = postalcode
         self.password = password
-        self.accountid = accountid
+        self.accountID = accountID
 
     def json(self):
         customer_entry = {
             "username": self.username,
             "password": self.password,
             "postalcode": self.postalcode,
-            "accountid": self.accountid
+            "accountID": self.accountID
         }
         return customer_entry
 
@@ -53,17 +53,17 @@ class accCb(db.Model):
 
     status = db.Column(db.String(50), primary_key=True)
     pendingcashback = db.Column(db.Float(2), nullable=True)
-    accountid = db.Column(db.String(50), nullable=True)
+    accountID = db.Column(db.String(50), nullable=True)
 
 
-    def __init__(self, accountid, pendingcashback, status):
-        self.accountid = accountid
+    def __init__(self, accountID, pendingcashback, status):
+        self.accountID = accountID
         self.pendingcashback = pendingcashback
         self.status = status
 
     def json(self):
         accCb_entry = {
-            "accountid": self.accountid,
+            "accountID": self.accountID,
             "pendingcashback": self.pendingcashback,
             "status": self.status
         }
@@ -78,30 +78,31 @@ class accCb(db.Model):
         return True
 
 # retrieve all customer 
-@app.route("/Customers", methods=['GET'])
+@app.route("/customers", methods=['GET'])
 def get_all():
     return jsonify({"Customers": [customer.json() for customer in Customer.query.all()]})
 
 # retrieve a particular customer   
-@app.route("/getCustomer/<string:AccountID>", methods=["GET"])
+@app.route("/getCustomer/<string:accountID>", methods=["GET"])
 @cross_origin(supports_credentials=True)
-def getProducts(AccountID):
-    Customer = Customer.query.get(AccountID)
-    Customer = Customer.json()
-    return jsonify(Customer)
+def getCustomer(accountID):
+    All_CB = Customer.query.filter_by(accountID=accountID).all()
+    if All_CB:
+        return jsonify({"CustomerParticulars":[cb.json() for cb in All_CB ]}), 200
+    else: 
+        return jsonify(False), 404
 
 # Creating a new Customer Record , not sure how the data gonna be passed 
 # rmb account id is created ussing UUID lmk who is doing this i can provide the code 
 
 
 #retreive a list of customer cashbacks
-@app.route("/allCustomerCashBack/<int:accountID>", methods=['GET'])
+@app.route("/oneCustomerCb/<string:accountID>", methods=['GET'])
 @cross_origin(supports_credentials=True)
-def UserProductProgress(accountID):
-    # print(username)
+def particularCashBack(accountID):
     All_CB = accCb.query.filter_by(accountID=accountID).all()
     if All_CB:
-        return jsonify({"CashBacks":[cb.json() for cb in All_CB.query.filter_by(accountID=accountID).all() ]}), 200
+        return jsonify({"CashBacks":[cb.json() for cb in All_CB]}), 200
     else: 
         return jsonify(False), 404
 
