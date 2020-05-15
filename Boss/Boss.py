@@ -67,20 +67,19 @@ class Questions(db.Model):
         }
         return questionInfo
 
-@app.route("/getBoss/<int:bossType>")
-def getBoss (bossType):
-    queryBosses = Boss.query.filter_by(bossType=bossType)
+@app.route("/getBoss")
+def getBoss ():
+    queryBosses = Boss.query.filter_by(bossType=0)
     bossesClass = []
     for boss in queryBosses: 
         bossesClass.append(boss.json())
     boss = random.randrange(len(bossesClass))
-    return jsonify(bossesClass[boss]), 200
+    return jsonify(bossesClass[boss])
 
 @app.route ("/getQuestions")
 def getQuestions ():
     #get 6 question for the fight
     noQ = Questions.query.count()
-    print (noQ)
     numbers = set([])
     for i in range (6):
         no = random.randrange(noQ)
