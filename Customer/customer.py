@@ -20,13 +20,16 @@ class Customer(db.Model):
     postalcode = db.Column(db.String(50), nullable=False)
     accountID = db.Column(db.String(50), nullable=False)
     points = db.Column(db.Integer)
+    savingsReward = db.Column(db.Boolean)
 
-    def __init__(self, username,password ,postalcode, accountID):
+
+    def __init__(self, username,password ,postalcode, accountID, savingsReward):
         self.username = username
         self.postalcode = postalcode
         self.password = password
         self.accountID = accountID
         self.points = 0
+        self.savingsReward = savingsReward
 
     def json(self):
         customer_entry = {
@@ -34,7 +37,8 @@ class Customer(db.Model):
             "password": self.password,
             "postalcode": self.postalcode,
             "accountID": self.accountID,
-            "points" : self.points
+            "points" : self.points,
+            "savingsReward" : self.savingsReward
         }
         return customer_entry
 
