@@ -27,9 +27,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <?php
 session_start();
-$accountID= '';
-if(isset($_SESSION['accountID'])){
-    $accountID = $_SESSION['accountID'];
+$username= '';
+if(isset($_SESSION['username'])){
+    $username = $_SESSION['username'];
 
 
 }else{
@@ -42,6 +42,8 @@ if(isset($_SESSION['accountID'])){
 
 ?>
 <script>
+
+
 var accountID = "<?php echo $accountID; ?>";
 </script>
 

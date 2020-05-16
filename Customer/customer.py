@@ -17,18 +17,20 @@ class Customer(db.Model):
     __tablename__ = 'customer'
 
     username = db.Column(db.String(50), nullable=False)
-    password = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
     postalCode = db.Column(db.String(50), nullable=False)
     accountID = db.Column(db.String(50), primary_key=True)
     points = db.Column(db.Integer)
+    encodedKey = db.Column(db.String(100), nullable=False)
 
 
-    def __init__(self,accountID, username, password ,postalCode):
+    def __init__(self,accountID, username, password ,postalCode, encodedKey):
         self.accountID = accountID
         self.username = username
         self.password = password
         self.postalCode = postalCode
         self.points = 0
+        self.encodedKey = encodedKey
 
     def json(self):
         customer_entry = {
@@ -36,7 +38,8 @@ class Customer(db.Model):
             "password": self.password,
             "postalcode": self.postalCode,
             "accountID": self.accountID,
-            "points" : self.points
+            "points" : self.points,
+            "encodedKey" : self.encodedKey
         }
         return customer_entry
 
@@ -53,7 +56,7 @@ def newCustomer(accountID):
         return jsonify({"message": "An accountID with '{}' already exists.".format(accountID)}), 400
 
     data = request.get_json()
-    customer = Customer(accountID, data['username'], sha256_crypt.hash(data['password']), data['postalCode'])
+    customer = Customer(accountID, data['username'], sha256_crypt.hash(data['password']), data['postalCode'], data['encodedKey'])
     try:
         db.session.add(customer)
         db.session.commit()
@@ -73,11 +76,22 @@ def newCustomer(accountID):
 #     else: 
 #         return jsonify(False), 404
 
-# retrieve a particular customer by postal code 
-@app.route("/getCustomer/<string:accountid>", methods=["GET"])
+@app.route("/getCustomerAID/<string:username>", methods=["GET"])
 @cross_origin(supports_credentials=True)
-def getCustomer(accountID):
-    All_CB = Customer.query.filter_by(accountID=accountID).first()
+def getCustomerbyUseranme(username):
+    userd = Customer.query.filter_by(username=username).first()
+    if userd:
+        return jsonify(userd.json()), 200
+    else: 
+        return jsonify(False), 404
+
+
+# retrieve a particular customer by postal code 
+# retrieve a particular customer 
+@app.route("/getCustomer/<string:customerid>", methods=["GET"])
+@cross_origin(supports_credentials=True)
+def getCustomer(customerid):
+    All_CB = Customer.query.filter_by(username=customerid).first()
     if All_CB:
         return jsonify(All_CB.json()), 200
     else: 
@@ -115,9 +129,8 @@ def authC(username):
     user = Customer.query.filter_by(username=username).first()
     if user:
         password = (Customer.query.filter_by(username=username).first().password)
-        password = sha256_crypt.unhash(password)
         
-        if str(password) == str(inputpassword):
+        if sha256_crypt.verify(inputpassword,password):
             return jsonify({"message": "True"}), 200
         else:
             return jsonify({"message": "Password does not match"}), 404
