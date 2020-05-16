@@ -243,17 +243,18 @@ var accountID = "<?php echo $accountID; ?>";
 
                         var serviceURL = "http://localhost:5001/addPoints/" + accountID + "/" + points
                              try {
-                                                    const response = await fetch(serviceURL, { method: 'GET' });
+                                                    const response = await fetch(serviceURL, { method: 'PUT' });
                                                     const data = await response.json();
                                                     console.log(data)
-                                                    
-
-                              } catch (error) {
+                                                    if (date){
+                                                        return TRUE
+                                                    }else{
+                                                        return FALSE
+                                                    }
+                            } catch (error) {
                                                 //   showError
                                                     // ('There is a problem retrieving books data, please try again later.<br />' + error)
-                                                }
-
-
+                            }
                         }
 
 
@@ -353,17 +354,16 @@ var accountID = "<?php echo $accountID; ?>";
                                             
                         $("#informationcard").append(paneltrans)
                                     
-                        if(todayd == todayd){
-                        sumdepo =  sumdepo - sumtrans
-                        if(sumdepo >= 50){
-
+                        if(lastday == todayd){
+                        saveamt =  sumdepo - sumtrans
+                        if(saveamt >= 50){
                             // call the async function
                             var updated =  updatepoints(accountID, 200)
-                            if(updated == true){
+                            if(updated == TRUE){
                                 var loc =  window.location.pathname;
                                 var dir = loc.substring(0, loc.lastIndexOf('/'));
-                            // change to ip
-                        // window.location.href = "http://localhost"+ dir + "/transactions.php";
+                                // change to ip
+                                window.location.href = "http://localhost"+ dir + "/transactions.php";
                             }
                             // refresh page 
 
