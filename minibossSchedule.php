@@ -27,16 +27,24 @@
     var accountID = ''
     </script>
 
-    <div>
+        <div id='bosschallenge'>
 
 
-    </div>
+        </div>
+
+        <div id='bossdates'>
+
+
+        </div>
 
     <script>
     // user username 
     // get postalcode -> user region
     var region = '';
     var postalcode = '';
+    var spawnDate = '';
+    var Bossname = ''
+    var BossType =''
 
     $(async () => {
         var serviceURL =
@@ -58,10 +66,10 @@
             //  showError
             // ('There is a problem retrieving books data, please try again later.<br />' + error)
         }
-
-
         // get region spawn date 
         console.log(postalcode)
+
+
         var serviceURL = "http://localhost:5004/getCustRegion/" + postalcode
         try {
             const response = await fetch(serviceURL, {
@@ -70,33 +78,95 @@
             });
             const data = await response.json();
             console.log(data)
-            if (data.length > 0) {
-                for (x in data) {
-                    region = data[x]
-                    region = data[x].RegionName
-                }
-
-            
-                console.log(region)
-
-            } else {
-
-                var printrow1 = `<div><p>Sorry Pal no rewards for you  kill some bosses man</p>
-                            </div>`
-                $("#rewardcontainer").append(printrow1)
-
-            }
-
-
-
+            region = data['RegionName']
 
         } catch (error) {
             //   showError
             // ('There is a problem retrieving books data, please try again later.<br />' + error)
         }
 
-        // get mini boss questions
+        // get mini boss date + questions
+        console.log(region)
 
+        var serviceURL = "http://localhost:5004/getSpawnDate/" + region
+        try {
+            const response = await fetch(serviceURL, {
+                method: 'GET',
+                mode: 'cors'
+            });
+            const data = await response.json();
+            console.log(data)
+            spawnDate = data['spawnDate']
+
+        } catch (error) {
+            //   showError
+            // ('There is a problem retrieving books data, please try again later.<br />' + error)
+        }
+
+        // base on mini boss the questions 
+        var serviceURL = "http://localhost:5009/getMiniBoss"
+        try {
+            const response = await fetch(serviceURL, {
+                method: 'GET',
+                mode: 'cors'
+            });
+            const data = await response.json();
+            console.log(data)
+            Bossname = data['bossName']
+            BossType = data['bossType']
+
+        } catch (error) {
+            //   showError
+            // ('There is a problem retrieving books data, please try again later.<br />' + error)
+        }
+
+        // maybe boss type can be a more reative name next time 
+        var challenge = `<div class="w3-card">
+                                            <h2>${Bossname}
+                                            </h2>
+                                            </div>`
+
+
+        $("#bosschallenge").append(challenge)
+
+
+        console.log(spawnDate) // array 
+        spawnDate = spawnDate.split(',');
+        var happen = "";
+
+        for(var i = 0 ; i < spawnDate.length; i++ ){
+            console.log(spawnDate[i])
+            switch(spawnDate[i]){
+
+
+            case '0': happen += "<p>BOSS is ON MONDAY</p>"
+                break;
+            
+            case '1': happen += "<p>BOSS is ON TUESDAY</p>"
+                break;
+            
+            case '2': happen += "<p>BOSS is ON WEDNESDAY</p>"
+                break;
+            
+            case '3': happen += "<p>BOSS is ON THURSDAY</p>"
+                break;
+            
+            case '4': happen += "<p>BOSS is ON FRIDAY</p>"
+                break;
+            
+            case '5': happen += "<p>BOSS is ON SATURDAY</p>"
+                break;
+            
+            default: 
+
+            }
+
+
+
+        }
+        console.log("This is happen: "+happen)
+        
+        $("#bossdates").append(happen)
 
 
 
