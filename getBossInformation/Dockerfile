@@ -2,5 +2,5 @@ FROM python:3
 WORKDIR /usr/src/app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
-COPY ./Boss.py .
-CMD [ "python", "./Boss.py" ]
+COPY ./GetBossInformation.py .
+CMD [ "python", "./GetBossInformation.py" ]
