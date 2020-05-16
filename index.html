@@ -10,12 +10,17 @@
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylequiz.css"/>
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
@@ -69,8 +74,68 @@
         
             <div class="line"></div>
 
-            <h2>Battle</h2>
-            <p>Quiz game will be placed here soon</p>
+            <body>  
+
+                <div class="quiz-home-box custom-box show">
+                    <h4>The Boss is in your region!</h4>
+                    <!-- <p>Time left to enter:</p>
+                    <div class="time-to-enter">
+                            <div class="remaining-time-to-enter"></div>
+                            <span class="time-up-to-enter">Time's Up</span>
+                        </div> -->
+                    <button type="button" class="start-quiz-btn btn">Gear up and Fight!</button>
+                </div>
+
+                <!-- <div class="quiz-home-box-completed custom-box show">
+                    <h4>Boss is defeated!</h4>
+                    <button type="button" class="start-quiz-btn btn">Fight!</button>
+                </div> -->
+              
+                <div class="quiz-box custom-box">
+                    <div class="stats">
+                        <div class="quiz-time">
+                            <div class="remaining-time"></div>
+                            <span class="time-up-text">Time's Up</span>
+                        </div>
+                        <div class="score-board">
+                            <span class="score-text">Damaged Inflicted:</span>
+                            <span class="correct-answers"></span>
+                        </div>
+                    </div>
+                    <div class="question-box">
+                        <div class="current-question-num">
+                        
+                        </div>
+                        <div class="question-text">
+                          
+                        </div>
+                    </div>
+                    <div class="option-box">
+                        
+                    </div>
+                    <div class="answer-description">
+                     
+                    </div>
+                    <div class="next-question">
+                      <button type="button" class="next-question-btn btn">Next Question</button>
+                      <button type="button" class="see-result-btn btn">See Your Result</button>
+                    </div>
+              
+                </div>
+              
+                <div class="quiz-over-box custom-box">
+                  <h1>Fight Results</h1>
+                  <h4>Total Opportunities: <span class="total-questions"></span></h4>
+                  <h4>Successful Attacks: <span class="total-correct"></span></h4>
+                  <h4>Missed Attacks: <span class="total-wrong"></span></h4>
+                  <h4>Strike Percentage: <span class="percentage"></span></h4>
+                  <h4>Total Damage Dealt: <span class="dmg-dealt"></span></h4>
+                  <!-- <button type="button" class="start-again-quiz-btn btn">Start Again</button> -->
+                  <button type="button" class="go-home-btn btn">Go to Home</button>
+                </div>
+               
+              <script src="scriptquiz.js"></script>
+              </body>
 
             
     </div>
