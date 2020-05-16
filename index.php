@@ -21,6 +21,16 @@
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php
+        $username = '';
+        if(isset($_GET['username'])){
+            session_start();
+            $_SESSION['username'] = $_GET['username'];
+        }else{
+            // have to relogging 
+        }
+    ?>
+
 </head>
 
 <body>
