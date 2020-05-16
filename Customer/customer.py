@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
 import json
+import basehash
 
 
 # ==================================== CONNECTION SPECIFICATION ====================================== #
@@ -11,6 +12,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 CORS(app)
+
+hash_fn = basehash.base36()  
 
 class Customer(db.Model):
     __tablename__ = 'customer'
@@ -39,6 +42,7 @@ class Customer(db.Model):
         }
         return customer_entry
 
+        
 # retrieve all customer 
 @app.route("/customers", methods=['GET'])
 def get_all():
@@ -51,12 +55,11 @@ def newCustomer(accountID):
         return jsonify({"message": "An accountID with '{}' already exists.".format(accountID)}), 400
 
     data = request.get_json()
-    print (data)
-    customer = Customer(accountID, **data)
-
+    customer = Customer(accountID, data['username'], hash_fn.hash(data['password']), data['postalCode'])
     try:
         db.session.add(customer)
         db.session.commit()
+
     except:
         return jsonify({"message": "An error occurred creating the account."}), 500
 
@@ -93,19 +96,29 @@ def getPoints(accountID):
     cust = Customer.query.get(accountID)
     return jsonify({"points" : cust.points})
 
-# Creating a new Customer Record , not sure how the data gonna be passed 
-# rmb account id is created ussing UUID lmk who is doing this i can provide the code 
+#Authenticate user method
+@app.route("/authC/<string:username>", methods=["POST"])
+def authC(username):
+#Getting the data
+    data = request.get_json()
+    #gets the password with key password in json data
+    inputpassword = data["password"]
+    #if user exist check pass otherwise return does not exist
+    user = Customer.query.filter_by(username=username).first()
+    if user:
+        password = (Customer.query.filter_by(username=username).first().password)
+        print (password)
+        password = hash_fn.unhash(password)
+        print (password)
+        print (inputpassword)
 
+        if str(password) == str(inputpassword):
+            return jsonify({"message": "True"}), 200
+        else:
+            return jsonify({"message": "Password does not match"}), 404
+    else:
+        return jsonify({"message": "Username does not exist"}), 404
 
-#retreive a list of customer cashbacks
-@app.route("/partCust/<string:accountID>", methods=['GET'])
-@cross_origin(supports_credentials=True)
-def partCust(accountID):
-    All_CB = Customer.query.filter_by(accountID=accountID).all()
-    if All_CB:
-        return jsonify({"Cust":[cb.json() for cb in All_CB]}), 200
-    else: 
-        return jsonify(False), 404
 
 
 if __name__=='__main__':
