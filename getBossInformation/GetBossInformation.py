@@ -20,7 +20,6 @@ def getSpawnDate(region):
 def miniBoss():
     r = requests.get("http://localhost:5003/getMiniBoss")
     return jsonify(r.json())
-
     
 @app.route("/getMainBoss")
 def mainBoss():

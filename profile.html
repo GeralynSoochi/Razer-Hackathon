@@ -107,21 +107,28 @@
                         </li>
                     </ul> -->
                     
-                    <div class="row">
-                        <div class="col"><h4>Username</h4></div>
-                        <div class="col"><h4>First Name</h4></div>
-                        <div class="col"><h4>Last Name</h4></div>
-                        <div class="col"><h4>Postal Code</h4></div>
-                        <div class="col"><h4>Account ID</h4></div>
-                        <div class="col"><h4>Points</h4></div>
-                        <div class="w-100"></div>
-                        <div class="col" id="user">Username</div>
-                        <div class="col" id="first">firstName</div>
-                        <div class="col" id="last">lastName</div>
-                        <div class="col" id="postal">Postal</div>
-                        <div class="col" id="accid">AccID</div>
-                        <div class="col" id="points">Points</div>
-                    </div><br><br>
+                    <table class="table table-borderless">
+                        <thead>
+                          <tr>
+                            <th scope="col">Username</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Postal Code</th>
+                            <th scope="col">Account ID</th>
+                            <th scope="col">Points</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td id="user">Username</td>
+                            <td id="first">firstName</td>
+                            <td id="last">lastName</td>
+                            <td id="postal">Postal</td>
+                            <td id="accid">AccID</td>
+                            <td id="points">Points</td>
+                          </tr>
+                        </tbody>
+                      </table>
 
                     <h4>Current Accounts</h4>
                     <table class="table table-bordered" id="accsTable">
@@ -143,12 +150,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-        // if (!sessionStorage['username']){
-		// 	// console.log("not logged in");
-		// 	window.location.href = "login.php";
-		// } else {
-        //     var username = sessionStorage['username']
-        // }
+        if (!sessionStorage['username']){
+			window.location.href = "login.php";
+		} else {
+            var username = sessionStorage['username']
+        }
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
@@ -162,36 +168,33 @@
             $('#main-container')
                 .append("<label>"+message+"</label>");
         }
-        // $(async() => {
-        //     // var serviceURL = "http://127.0.0.1:5001/getCustomer/" + username;
-
-        //     try {
-        //         const response =
-        //         await fetch(
-        //             serviceURL, { method: 'GET'}
-        //         );
-        //         const data = await response.json();
-        //         // array or array.length are falsy
-        //         if (!data) {
-        //             showError('Error retrieving your data.')
-        //         } else {
-        //             accid = data.encodedKey
-        //             $('#user').text(username)
-        //             $('#points').text(data.points)
-        //             $('#accid').text(accid)
-        //             $('#postal').text(data.postal)
-        //         }
-        //     } catch (error) {
-        //         // Errors when calling the service; such as network error, 
-        //         // service offline, etc
-        //         showError
-        //           ('There is a problem retrieving data, please try again later.<br />'+error);
-               
-        //     } // error
-        // });
         $(async() => {
-            var serviceURL = "http://127.0.0.1:5015/getDetails/8a8e86fd72174fdd01721cdb7f3b2c44";
-            // var serviceURL = "https://razerhackathon.sandbox.mambu.com/api/clients/"+ accid;
+            var serviceURL = "http://127.0.0.1:5001/getCustomer/" + username;
+
+            try {
+                const response =
+                await fetch(
+                    serviceURL, { method: 'GET'}
+                );
+                const data = await response.json();
+                // array or array.length are falsy
+                if (!data) {
+                    showError('Error retrieving your data.')
+                } else {
+                    accid = data.encodedKey
+                    $('#user').text(username)
+                    $('#points').text(data.points)
+                    $('#accid').text(accid)
+                    $('#postal').text(data.postalcode)
+                }
+            } catch (error) {
+                // Errors when calling the service; such as network error, 
+                // service offline, etc
+                showError
+                  ('There is a problem retrieving data, please try again later.<br />'+error);
+               
+            } 
+            var serviceURL = "http://127.0.0.1:5015/getDetails/"+ accid;
             
             try {
                 const response =
@@ -199,11 +202,9 @@
                     serviceURL, { method: 'GET'}
                 );
                 const data = await response.json();
-                console.log(data[0])
                 if (data["returnCode"]) {
                     showError('Error retrieving your data.')
                 } else {
-                    console.log(data["firstName"])
                     $('#first').text(data["firstName"])
                     $('#last').text(data["lastName"])
                 }
@@ -213,12 +214,9 @@
                 showError
                   ('There is a problem retrieving data, please try again later.<br />'+error);
                
-            } // error
-        });
-        $(async() => {           
-            // FIX THIS
-            var serviceURL = "http://127.0.0.1:5015/currentacc/getUser/8a8e87797217aa9401721a249ce00c2e"; 
-            // var serviceURL = "http://127.0.0.1:5015/currentacc/getUser/" + accid; 
+            } 
+            
+            var serviceURL = "http://127.0.0.1:5015/currentacc/getUser/" + accid; 
     
             try {
                 const response =

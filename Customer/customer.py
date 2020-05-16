@@ -17,11 +17,11 @@ class Customer(db.Model):
     __tablename__ = 'customer'
 
     username = db.Column(db.String(50), nullable=False)
-    password = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
     postalCode = db.Column(db.String(50), nullable=False)
     accountID = db.Column(db.String(50), primary_key=True)
     points = db.Column(db.Integer)
-    encodedKey = db.Column(db.String(50), nullable=False)
+    encodedKey = db.Column(db.String(100), nullable=False)
 
 
     def __init__(self,accountID, username, password ,postalCode, encodedKey):
@@ -87,10 +87,11 @@ def getCustomerbyUseranme(username):
 
 
 # retrieve a particular customer by postal code 
-@app.route("/getCustomer/<string:accountid>", methods=["GET"])
+# retrieve a particular customer 
+@app.route("/getCustomer/<string:customerid>", methods=["GET"])
 @cross_origin(supports_credentials=True)
-def getCustomer(accountID):
-    All_CB = Customer.query.filter_by(accountID=accountID).first()
+def getCustomer(customerid):
+    All_CB = Customer.query.filter_by(username=customerid).first()
     if All_CB:
         return jsonify(All_CB.json()), 200
     else: 
@@ -128,8 +129,8 @@ def authC(username):
     user = Customer.query.filter_by(username=username).first()
     if user:
         password = (Customer.query.filter_by(username=username).first().password)
-        print (password)
-        if sha256_crypt.verify(inputpassword, password):
+        
+        if sha256_crypt.verify(inputpassword,password):
             return jsonify({"message": "True"}), 200
         else:
             return jsonify({"message": "Password does not match"}), 404
