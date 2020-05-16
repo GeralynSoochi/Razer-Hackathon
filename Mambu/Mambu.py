@@ -31,7 +31,8 @@ def registration():
     body = {
         "username" : username,
         "password" : password, # need to hash 
-        "postalCode" : postalCode
+        "postalCode" : postalCode,
+        "encodedKey" : clientID
     }
     r = requests.post ("http://localhost:5001/newCustomer/" + accountID, json= body)
     print (r.status_code)

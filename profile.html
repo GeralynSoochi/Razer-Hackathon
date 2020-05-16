@@ -143,11 +143,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-        // if (!sessionStorage['accountID']){
+        // if (!sessionStorage['username']){
 		// 	// console.log("not logged in");
 		// 	window.location.href = "login.php";
 		// } else {
-        //     var accid = sessionStorage['accountID']
+        //     var username = sessionStorage['username']
         // }
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
@@ -163,7 +163,7 @@
                 .append("<label>"+message+"</label>");
         }
         // $(async() => {
-        //     // var serviceURL = "http://127.0.0.1:5001/getCustomer/" + accid;
+        //     // var serviceURL = "http://127.0.0.1:5001/getCustomer/" + username;
 
         //     try {
         //         const response =
@@ -175,7 +175,8 @@
         //         if (!data) {
         //             showError('Error retrieving your data.')
         //         } else {
-        //             $('#user').text(data.username)
+        //             accid = data.UEK
+        //             $('#user').text(username)
         //             $('#points').text(data.points)
         //             $('#accid').text(accid)
         //             $('#postal').text(data.postal)
