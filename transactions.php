@@ -239,17 +239,14 @@ var accountID = "<?php echo $accountID; ?>";
                 var datefull = new Date(fullDate);
                 return datefull
             }
-                async function updatepoints(accountID){
+                async function updatepoints(accountID, points){
 
-                        var serviceURL = "http://localhost:5001/partCust/" + accountID 
+                        var serviceURL = "http://localhost:5001/addPoints/" + accountID + "/" + points
                              try {
                                                     const response = await fetch(serviceURL, { method: 'GET' });
                                                     const data = await response.json();
                                                     console.log(data)
-                                                    //console.log(data['0'].amount);
-                                                    // call the add points here and return true 
-
-                                                    // go to line 
+                                                    
 
                               } catch (error) {
                                                 //   showError
@@ -361,7 +358,7 @@ var accountID = "<?php echo $accountID; ?>";
                         if(sumdepo >= 50){
 
                             // call the async function
-                            var updated =  updatepoints(accountID)
+                            var updated =  updatepoints(accountID, 200)
                             if(updated == true){
                                 var loc =  window.location.pathname;
                                 var dir = loc.substring(0, loc.lastIndexOf('/'));
