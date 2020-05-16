@@ -90,5 +90,11 @@ def updateSpawnDate(spawnDate, regionName):
     db.session.commit()
     return jsonify(True)
 
+@app.route("/getRegions", methods=["GET"])
+@cross_origin(supports_credentials=True)
+def getRegions():        
+    return jsonify({"Regions": [region.json() for region in Region.query.all()]})
+    
+    
 if __name__=='__main__':
     app.run(host='0.0.0.0',port=5004, debug=True)

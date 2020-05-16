@@ -7,18 +7,6 @@ import requests
 
 app = Flask(__name__)
 
-#auto mate this to a weekly task
-@app.route("/genSpawnDate")
-def genSpawnDate ():
-    numbers = set([])
-    for i in range (2): # spawn rate; change accordingly.
-        genNo = random.randrange(6)
-        while genNo in numbers: 
-            genNo = random.randrange(6)
-        numbers.add(str(genNo))
-    numbers = ",".join(list(numbers))
-    r = requests.put("http://localhost:5004/updateSpawnDate/" + numbers )
-    return jsonify(True)
 
 @app.route("/getSpawnDate/<string:region>") 
 def getSpawnDate(region): 
