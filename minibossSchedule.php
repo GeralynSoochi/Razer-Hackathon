@@ -50,9 +50,9 @@
             </div>
 
             <ul class="list-unstyled components">
-                <p>Joseph Lee</p>
+                <p><?=$_SESSION['username'];?></p>
                 <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Games</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
                             <a href="index.php">Region Wars</a>
@@ -75,12 +75,12 @@
         <!-- Page Content  -->
         <div id="content">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        
                 <div class="container-fluid">
 
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
-                        <span></span>
+                        <span>Toggle Menu</span>
                     </button>
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -91,7 +91,11 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     </div>
                 </div>
-            </nav>
+            
+            <br>
+            <h2>Mini Boss Schedule</h2>
+
+            <div class="line"></div>
 
     <script>
     var username = "<?php echo $username; ?>";
@@ -107,17 +111,17 @@
         <div class="w3-col m6 w3-padding">
 
         <div class="w3-card w3-round w3-green">
-        <div class="w3-container w3-padding" id='mon'>Monday:
+        <div class="w3-container w3-padding" id='mon'><h4>Monday:</h4>
         </div><br/>
         </div><br>
 
         <div class="w3-card w3-round w3-orange">
-        <div class="w3-container w3-padding" id='tue'>Tuesday:
+        <div class="w3-container w3-padding" id='tue'><h4>Tuesday:</h4>
         </div><br/>
         </div><br>
 
         <div class="w3-card w3-round w3-indigo">
-        <div class="w3-container w3-padding" id='wed'>Wednesday:
+        <div class="w3-container w3-padding" id='wed'><h4>Wednesday:</h4>
         </div><br/>
         </div><br>
 
@@ -126,17 +130,17 @@
         <div class="w3-col m6 w3-padding">
 
         <div class="w3-card w3-round w3-blue">
-        <div class="w3-container w3-padding" id='thu'>Thursday:
+        <div class="w3-container w3-padding" id='thu'><h4>Thursday:</h4>
         </div><br/>
         </div><br>
 
         <div class="w3-card w3-round w3-yellow">
-        <div class="w3-container w3-padding" id='fri'>Friday:
+        <div class="w3-container w3-padding" id='fri'><h4>Friday:</h4>
         </div><br/>
         </div><br>
                     
         <div class="w3-card w3-round w3-red">
-        <div class="w3-container w3-padding" id='sat'>Saturday:
+        <div class="w3-container w3-padding" id='sat'><h4>Saturday:</h4>
         </div><br/>
         </div><br>
 
@@ -255,22 +259,22 @@
             switch(spawnDate[i]){
 
 
-            case '0': happen +="#m"
+            case '0': happen +="#mon"
                 break;
             
-            case '1': happen += "#t"
+            case '1': happen += "#tue"
                 break;
             
-            case '2': happen += "#w"
+            case '2': happen += "#wed"
                 break;
             
-            case '3': happen += "#th"
+            case '3': happen += "#thu"
                 break;
             
-            case '4': happen += "#f"
+            case '4': happen += "#fri"
                 break;
             
-            case '5': happen += "#s"
+            case '5': happen += "#sat"
                 break;
             
             default: 
@@ -278,7 +282,7 @@
             }
 
             
-        var icon ="<div>bossicon</div>";
+        var icon ="<div class='schedule'><img src='img/evil.png' width='42' height='42'><p style='color:white'>Mini Boss Alert</p></div>";
 
         $(happen).append(icon)
 

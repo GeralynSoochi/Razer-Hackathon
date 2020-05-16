@@ -54,7 +54,7 @@
             <ul class="list-unstyled components">
                 <p><?=$_SESSION['username'];?></p>
                 <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Games</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
                             <a href=#>Region Wars</a>
@@ -77,12 +77,12 @@
         <!-- Page Content  -->
         <div id="content">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+           
                 <div class="container-fluid">
 
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
-                        <span></span>
+                        <span>Toggle Menu</span>
                     </button>
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -93,8 +93,8 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     </div>
                 </div>
-            </nav>
-
+            
+            <br>
             <h2>Region Wars</h2>
 
             <div class="line"></div>
