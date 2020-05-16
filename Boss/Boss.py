@@ -88,24 +88,12 @@ def getMainBoss ():
         questions = getQuestions()
         print (questions)
         return jsonify(questions)
-    return jsonify(True)
+    return jsonify(False)
     # add on for the other mainbosses
 
 def getQuestions ():
     #get 6 question for the fight
-    noQ = Questions.query.count()
-    numbers = set([])
-    for i in range (6):
-        no = random.randrange(noQ)
-        while no in numbers: 
-            no = random.randrange(noQ)
-        numbers.add(no)
-
-    questions = []
-    print (numbers)
-    for num in numbers: 
-        questions.append(Questions.query.filter_by(questionNumber = num).first().json())
-    return questions
+    return jsonify({"Questions": [question.json() for question in Questions.query.all()]})
 
 
 if __name__=='__main__':
