@@ -95,27 +95,33 @@ var accountID = "<?php echo $accountID; ?>";
                 </div>
             </nav>
 
-            <h2>Transactions</h2>
+            <h2>Transactions Wallet</h2>
 
             <div class="w3-container w3-content" style="max-width:1400px;margin-top:20px">    
+
                 <!-- The Grid -->
                 <div class="w3-row">
                   <!-- Left Column -->
-                  <div class="w3-col m4">
+                  <div class="w3-col m6">
               
                     <!--  --> 
                     <div class="w3-card w3-round w3-white">
                       <div class="w3-container w3-padding">
-                       <h5></h5>
+                       <h5>Inflow & Outflow</h5>
               
-                       
-              
-                        <br><br>
-              
-                        <div id='TransContainer' class="w3-responsive">
+                        <br>
 
-                        </div>
-              
+                        <table class="w3-table w3-bordered">
+
+                        
+                        <tbody id="TransContainer" style="display: block; height: 800px; overflow-y: scroll">
+      
+                        </tbody>
+		
+                        
+                        </table>
+                        <br>
+                        
                       </div>
                     </div>
                     <br>
@@ -124,7 +130,7 @@ var accountID = "<?php echo $accountID; ?>";
                   </div>
                   
                   <!-- Right Column -->
-                  <div class="w3-col m8">
+                  <div class="w3-col m4">
                   
                     <div class="w3-row-padding">
               
@@ -193,11 +199,11 @@ var accountID = "<?php echo $accountID; ?>";
                             </select>
                             </div>
                             <div>
-                            <input type='text' id='Amount' name='DepositAmount'>
+                            <input type='text' id='Amount' name='DepositAmount' placeholder='DepositAmount'>
                             </div>
                             <div>
                             <input type='text' id='accountno' name='accountno' placeholder='Transfer Account Here'>
-                            <button id="TransactionBtn" value="Transfer" class="w3-button rounded-pill">OKay</button>
+                            <button id="TransactionBtn" value="Transfer" class="w3-button rounded-pill">Deposit</button>
                             </div>
                             <div><textarea id='notes' name='comments' rows='5' cols='10'></textarea></div>
 
@@ -298,26 +304,26 @@ var accountID = "<?php echo $accountID; ?>";
                                 }
                                 
                                 if(positivetransfer == 1){
-                                    var panel = `<div 
-                                class="w3-panel w3-hover-shadow w3-blue w3-card-4">
+                                    var panel = `<tr><td><div 
+                                class="custom-box">
                                 <p style="color:black;"><br/>
                                 TransactionID: ${transaction.transactionId}<br/>
                                 Date/Time: ${fullDate.toLocaleString('en-US', { timeZone: 'Asia/Singapore' })}<br/>
                                 Amount: <b style='color:red;'> ${transaction.amount * -1}</b><br/>
                                 Comment: ${transaction.comment}<br/>
                                 </p>
-                                </div>`
+                                </div></td></tr>`
                                 $("#TransContainer").append(panel)
                                 }else{
-                                    var panel = `<div 
-                                class="w3-panel w3-hover-shadow w3-blue w3-card-4">
+                                    var panel = `<tr><td><div 
+                                class="custom-box">
                                 <p style="color:black;"><br/>
                                 TransactionID: ${transaction.transactionId}<br/>
                                 Date/Time: ${fullDate.toLocaleString('en-US', { timeZone: 'Asia/Singapore' })}<br/>
                                 Amount: ${transaction.amount}<br/>
                                 Comment: ${transaction.comment}<br/>
                                 </p>
-                                </div>`
+                                </div></td></tr>`
                                 $("#TransContainer").append(panel)
                                 }
 
