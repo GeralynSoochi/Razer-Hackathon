@@ -82,7 +82,8 @@
                     <a href="transactions.php">Wallet</a>
                 </li>
                 <li>
-                    <a href="#">Logout</a>
+                    <img src="img/exit.png" class="logout-image">
+                    <a class="logout-text" href="#">Logout</a>
                 </li>
             </ul>
         </nav>

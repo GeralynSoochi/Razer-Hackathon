@@ -86,7 +86,8 @@ if(isset($_SESSION['username'])){
                     <a href=#>Wallet</a>
                 </li>
                 <li>
-                    <a href="#">Logout</a>
+                    <img src="img/exit.png" class="logout-image">
+                    <a class="logout-text" href="#">Logout</a>
                 </li>
             </ul>
         </nav>
