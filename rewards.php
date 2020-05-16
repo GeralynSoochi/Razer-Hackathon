@@ -7,8 +7,15 @@
 </head>
     <body>
         <!-- retrieve redeemable rewards -->
+
+        <script>
+    
+
+        <script>
+        
         <script> 
             async function retrieveRewards(accountID) {
+                
                     var serviceURL = "http://localhost:5022/retrieveRedeemableRewards/" + accountID
                     try {
                         const response = await fetch(serviceURL, { 
@@ -24,6 +31,8 @@
                     }
                 }
            // call based on the accountID 
+
+           
             retrieveRewards("VEXO341")
 
         
