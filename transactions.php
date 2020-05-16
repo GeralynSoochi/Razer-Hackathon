@@ -160,7 +160,28 @@ var accountID = "<?php echo $accountID; ?>";
                                 });
                                 </script>
               
-              
+                             <script>    
+
+                            // retrieve particular info 
+                                $(async() => {
+                                    var serviceURL = "http://localhost:5001/getPoints/" + accountID; 
+                                    // to make the post + lmk ill send code 
+                                    try {
+                                        const response =
+                                        await fetch(serviceURL, { method: 'GET' });
+                                        const data = await response.json();
+                                        console.log(data)
+                                        //console.log(data['0'].amount)
+                                        var printrow1 = "<h6>Your Points Balance : <b>"+ data.points +"</b> </h6>"
+                                        $("#balanceContainer").append(printrow1)
+                                    
+                                        
+                                    } catch (error) {
+                                      //  showError
+                                           // ('There is a problem retrieving books data, please try again later.<br />' + error)
+                                    }
+                                });
+                                </script>
                             
                             </div>
                             
@@ -214,21 +235,14 @@ var accountID = "<?php echo $accountID; ?>";
         var lastday = new Date(todayd.getFullYear(), todayd.getMonth()+1, 0).toString()
 
         console.log(lastday)
-
-
-
             function dateExtractor(fullDate){
                 var datefull = new Date(fullDate);
                 return datefull
             }
-
-
-
-
                 async function updatepoints(accountID){
 
                         var serviceURL = "http://localhost:5001/partCust/" + accountID 
-                                                try {
+                             try {
                                                     const response = await fetch(serviceURL, { method: 'GET' });
                                                     const data = await response.json();
                                                     console.log(data)
@@ -237,7 +251,7 @@ var accountID = "<?php echo $accountID; ?>";
 
                                                     // go to line 
 
-                                                } catch (error) {
+                              } catch (error) {
                                                 //   showError
                                                     // ('There is a problem retrieving books data, please try again later.<br />' + error)
                                                 }
