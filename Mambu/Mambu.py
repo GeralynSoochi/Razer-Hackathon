@@ -47,6 +47,7 @@ def create_client(firstName, lastName, assignedBranchKey, validUntil, documentId
 
     response = requests.request("POST", clientURL, headers=headers, data = payload)
     response = response.json()
+    print (response)
     encodedKey = (response["client"]["encodedKey"])
     # try:
     #     print(firstName)
