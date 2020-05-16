@@ -17,7 +17,7 @@ class Customer(db.Model):
     __tablename__ = 'customer'
 
     username = db.Column(db.String(50), nullable=False)
-    password = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
     postalCode = db.Column(db.String(50), nullable=False)
     accountID = db.Column(db.String(50), primary_key=True)
     points = db.Column(db.Integer)
@@ -118,9 +118,8 @@ def authC(username):
     user = Customer.query.filter_by(username=username).first()
     if user:
         password = (Customer.query.filter_by(username=username).first().password)
-        password = sha256_crypt.unhash(password)
         
-        if str(password) == str(inputpassword):
+        if sha256_crypt.verify(inputpassword,password):
             return jsonify({"message": "True"}), 200
         else:
             return jsonify({"message": "Password does not match"}), 404
