@@ -23,7 +23,9 @@ $(async() => {
             question1['options'] =Options
             question1['answer'] = Options.indexOf(Answer)            
 
-            QNA.push(question1)
+            if(i <= 9){
+                QNA.push(question1)
+            }
 
         }
 

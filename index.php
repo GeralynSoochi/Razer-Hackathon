@@ -40,7 +40,7 @@
             // have to relogging 
         }
     ?>
-   
+
 </head>
 
 <body>
@@ -58,6 +58,9 @@
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
                             <a href=#>Region Wars</a>
+                        </li>
+                        <li>
+                            <a href="minibossSchedule.php">Mini Boss Schedule</a>
                         </li>
 
                     </ul>
