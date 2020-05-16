@@ -10,11 +10,13 @@ CORS(app)
 
 
 # Create a new Trnsactions 
-@app.route("/createNewTransaction/accountID", methods=['POST'])
+@app.route("/createNewTransaction/<string:accountID>", methods=['POST'])
 @cross_origin(supports_credentials=True)
 def createNewTransaction(accountID):
-    OrderInfo = request.get_json()
-    createStatus = requests.post("https://razerhackathon.sandbox.mambu.com/api/savings/"+ accountID +"/transactions", auth=('Team16', 'pass1F3E7A72E'), json = json.dumps(OrderInfo))
+    transactionInfo = request.get_json()
+    transactionInfo = json.loads(json.dumps(transactionInfo,default=str))
+    createStatus = requests.post("https://razerhackathon.sandbox.mambu.com/api/savings/"+ accountID +"/transactions"    , json = transactionInfo)
+    print(createStatus)
     if createStatus.status_code == 201:
         return True
     return False

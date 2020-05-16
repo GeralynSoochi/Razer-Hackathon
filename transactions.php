@@ -25,6 +25,27 @@
     <!--JQUERY LIBRARY-->
     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<?php
+session_start();
+$accountID= '';
+if(isset($_SESSION['accountID'])){
+    $accountID = $_SESSION['accountID'];
+
+
+}else{
+
+    // temporary 
+    $accountID = 'WMMF954';
+    // unauthorized log in 
+
+}
+
+?>
+<script>
+var accountID = "<?php echo $accountID; ?>";
+</script>
+
+
 </head>
 
 <body>
@@ -110,7 +131,7 @@
 
 
                                 $(async() => {
-                                    var serviceURL = "http://localhost:5044/getUserTransaction/WMMF954";
+                                    var serviceURL = "http://localhost:5044/getUserTransaction/" + accountID;
                                   
                                     try {
                                         const response =
@@ -172,22 +193,15 @@
                         <div class="w3-card w3-round w3-white">
                           <div class="w3-container w3-padding">
                           <h5>Savings</h5>
-                          <form method="POST" action="transactions.php">
                             <fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
                             <div data-role = "fieldcontain">
               
                             <label id="balanceContainer"></label>
                             <script>    
-                            function deleteChild(id) { 
-                                var e = document.getElementById(id); 
-                                e.innerHTML = ""; 
-                            }
-
-                            deleteChild("balanceContainers")
 
                             // retrieve particular info 
                                 $(async() => {
-                                    var serviceURL = "http://localhost:5044/getOverallSavingAccount/WMMF954"; 
+                                    var serviceURL = "http://localhost:5044/getOverallSavingAccount/" + accountID; 
                                     // to make the post + lmk ill send code 
                                     try {
                                         const response =
@@ -213,16 +227,16 @@
                             <br>
                             <div>
                             <input type='text' name='DepositAmount'>
-                            <button name="deposit" value="Deposit" class="w3-button rounded-pill">Deposit</button> 
+                            <button id="DepositBtn" value="Transfer" class="w3-button rounded-pill">Deposit</button>
+                       
                             </div>
                             <div>
-                            <input type='text' name='WithdrawAmount'>
-                            <button name="withdrawBtn" value="Withdraw"class="w3-button rounded-pill">Withdraw</button>
+                            <input type='text' name='TransferAmount'>
+                            <button id="TransferBtn" value="Transfer" class="w3-button rounded-pill">Transfer</button>
                             </div>
 
                             <div><textarea name='comments' rows='5' cols='10'></textarea></div>
 
-                            </form>
               
                             </div>
                           </div>
@@ -246,35 +260,17 @@
                                 
  
     <script>    
-        $('#withdrawBtn').click(async(event) => {
-
-            console.log("Retrieve Payment info");
-            // get the username and password
-            /*
-                {
-                    "amount": 200,
-                    "notes": "Deposit into savings account",
-                    "type": "DEPOSIT",
-                    "method": "bank",
-                    "customInformation": [
-                        {
-                            "value": "unique identifier for receipt",
-                            "customFieldID": "IDENTIFIER_TRANSACTION_CHANNEL_I"
-                        }
-                    ]
-                }
-            */
-
-            var password = $('#WithdrawAmount').val();
+        $('#DepositBtn').click(async(event) => {
+            var amount = $('#WithdrawAmount').val();
             var notes = $('#notes').val();
             // not sure if bank need var bank = $('#bank').val();
-            
             // hashing is here 
 
+            // if amount is number then pass 
 
             var requestBody = {
-                    "amount": 200,
-                    "notes": "Deposit into savings account",
+                    "amount": "20",
+                    "notes": "HI",
                     "type": "DEPOSIT",
                     "method": "bank",
                     "customInformation": [
@@ -284,9 +280,9 @@
                         }
                     ]
                 }
+            
 
-
-            var serviceURL = "http://13.250.108.137:8000/customer/auser/" + username;
+            var serviceURL = "http://localhost:5044/createNewTransaction/" + accountID;
                     
             var requestParam = {
                 headers: {  "Content-Type": "application/json" },
@@ -296,6 +292,7 @@
             }
 
             var authenticated = "False";
+
             try {
                 const response = await fetch(serviceURL, requestParam);
                 data = await response.json();
@@ -305,6 +302,10 @@
             console.error(error);
             }
 
+
+
+            
+
             if(authenticated == "True"){
                 //save username is javascript session
                 sessionStorage.setItem("username",username)
@@ -312,35 +313,16 @@
                 var loc =  window.location.pathname;
                 var dir = loc.substring(0, loc.lastIndexOf('/'));
 
-                window.location.href = "http://54.169.99.219"+ dir + "/indexlogin.html?user=" + username;
+                // change to ip
+                window.location.href = "http://localhost"+ dir + "/transaction.php";
                     
             }else{
                 showError(authenticated)
             }
 
-
          });
      // retrieve particular info 
-             $(async () => {
-                var serviceURL = "http://localhost:5044/getOverallSavingAccount/WMMF954";
-                                    // to make the post + lmk ill send code 
-                    try {
-                        const response =
-                        await fetch(serviceURL, {
-                        method: 'GET'
-                        });
-                    const data = await response.json();
-                    console.log(data)
-                                        //console.log(data['0'].amount)
-                    var printrow1 = "<h6>Your Account Balance : <b>" + data.balance + "</b> </h6>"
-                    $("#balanceContainer").append(printrow1)
-
-
-                    } catch (error) {
-                        showError
-                        ('There is a problem retrieving books data, please try again later.<br />' + error);
-                     }
-                    });
+ 
     
     </script>
     <!-- jQuery CDN - Slim version (=without AJAX) -->

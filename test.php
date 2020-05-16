@@ -7,7 +7,14 @@
 </head>
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<?php
+session_start();
+
+?>
 <script>    
+
+var accountID = "<?php echo $_SESSION['accountID']; ?>";
+
 
 // retrieve particular info 
     $(async() => {
