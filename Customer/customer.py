@@ -107,11 +107,8 @@ def authC(username):
     user = Customer.query.filter_by(username=username).first()
     if user:
         password = (Customer.query.filter_by(username=username).first().password)
-        print (password)
         password = hash_fn.unhash(password)
-        print (password)
-        print (inputpassword)
-
+        
         if str(password) == str(inputpassword):
             return jsonify({"message": "True"}), 200
         else:
