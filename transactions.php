@@ -58,7 +58,7 @@ if(isset($_SESSION['username'])){
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="index.html">Region Wars</a>
+                            <a href="index.php">Region Wars</a>
                         </li>
 
                     </ul>
@@ -105,7 +105,7 @@ if(isset($_SESSION['username'])){
               
                     <!--  --> 
                     <div class="w3-card w3-round w3-white">
-                      <div class="w3-container w3-padding">
+                      <div class="w3-container w3-padding"><br>
                        <h5>Inflow & Outflow</h5>
               
                         <br>
@@ -136,7 +136,7 @@ if(isset($_SESSION['username'])){
                       <div class="w3-col m13">
                       <!-- Savings -->
                         <div class="w3-card w3-round w3-white">
-                          <div class="w3-container w3-padding">
+                          <div class="w3-container w3-padding"> <br>
                           <h5>Savings</h5>
                             <fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
                             <div data-role = "fieldcontain">

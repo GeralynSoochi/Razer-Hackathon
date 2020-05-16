@@ -55,7 +55,7 @@ body{
     margin: 0 0 30px;
 }
 
-.btnn{
+.btn{
     background-color: #ff8b00;
     border: 2px solid #b96502;
     padding: 14px 15px;
@@ -73,6 +73,7 @@ body{
 }
 
 .quiz-box{
+    width: 100%;
     background-color: #ebd8b7;
     display: none;
 }
