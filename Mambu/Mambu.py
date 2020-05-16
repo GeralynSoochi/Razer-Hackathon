@@ -29,11 +29,11 @@ def registration():
     accountID = createCurrAcc(clientID)
     # create user in our records
     body = {
+        "username" : username,
         "password" : password, # need to hash 
-        "postalCode" : postalCode,
-        "accountID" : accountID
+        "postalCode" : postalCode
     }
-    r = requests.post ("http://localhost:5001/newCustomer/" + username, json= body)
+    r = requests.post ("http://localhost:5001/newCustomer/" + accountID, json= body)
     print (r.status_code)
     return jsonify(True)
 

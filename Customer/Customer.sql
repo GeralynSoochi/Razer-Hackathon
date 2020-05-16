@@ -10,6 +10,5 @@ CREATE TABLE customer (
     postalcode CHAR(6) NOT NULL,
     accountID VARCHAR(50),
     points INT NOT NULL DEFAULT 0,
-    savingsReward BOOLEAN,
     PRIMARY KEY (username)
 ) ;

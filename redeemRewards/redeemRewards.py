@@ -6,10 +6,10 @@ import requests
 
 app = Flask(__name__)
 
-@app.route("/redeemRewards/<string:username>/<int:rewardID>/<int:points>", methods = ["PUT"])
-def redeemRewards(username, rewardID, points):
+@app.route("/redeemRewards/<string:accountID>/<int:rewardID>/<int:points>", methods = ["PUT"])
+def redeemRewards(accountID, rewardID, points):
     r = requests.put("http://localhost:5002/updateRewardQuantity/" + str(rewardID))
-    rTwo = requests.put("http://localhost:5001/updatePoints/" + username + "/" + str(points))
+    rTwo = requests.put("http://localhost:5001/updatePoints/" + accountID + "/" + str(points))
     if ( r.status_code == 200 and r.status_code == 200):
         return jsonify(True)
     return jsonify(False)
