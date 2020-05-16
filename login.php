@@ -177,7 +177,7 @@
                 };
 
 
-				var serviceURL = "http://localhost:5001/authC/" + username;
+				var serviceURL = "http://54.169.136.72:5001/authC/" + username;
                           
                 var requestParam = {
                     headers: {  "Content-Type": "application/json" },

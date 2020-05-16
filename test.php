@@ -19,8 +19,8 @@ var accountID = "<?php echo $_SESSION['accountID']; ?>";
 // retrieve particular info 
     $(async() => {
         // Change serviceURL to your own
-        var serviceURL = "http://localhost:5044/getUserTransaction/WMMF954";
-        // var serviceURL = "http://localhost:5044/getOverallSavingAccount/WMMF954"; - to view overall saving acc
+        var serviceURL = "http://54.169.136.72:5044/getUserTransaction/WMMF954";
+        // var serviceURL = "http://54.169.136.72:5044/getOverallSavingAccount/WMMF954"; - to view overall saving acc
         // to make the post + lmk ill send code 
         try {
             const response =

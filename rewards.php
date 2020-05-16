@@ -34,7 +34,7 @@
     <script>
     $(async () => {
         var serviceURL =
-            "http://localhost:5001/getCustomerAID/" + username;
+            "http://54.169.136.72:5001/getCustomerAID/" + username;
         // to make the post + lmk ill send code 
         try {
             const response =
@@ -50,7 +50,7 @@
             //  showError
             // ('There is a problem retrieving books data, please try again later.<br />' + error)
         }
-        var serviceURL = "http://localhost:5022/retrieveRedeemableRewards/" + accountID
+        var serviceURL = "http://54.169.136.72:5022/retrieveRedeemableRewards/" + accountID
         try {
             const response = await fetch(serviceURL, {
                 method: 'GET',
@@ -102,7 +102,7 @@
         console.log("press")
 
         var serviceURL =
-            "http://localhost:5001/getCustomerAID/" + username;
+            "http://54.169.136.72:5001/getCustomerAID/" + username;
         // to make the post + lmk ill send code 
 
 
@@ -124,7 +124,7 @@
         }
 
 
-        var serviceURL2 = "http://localhost:5022/redeemRewards/" + accountID + "/" + rewardID + "/" + points
+        var serviceURL2 = "http://54.169.136.72:5022/redeemRewards/" + accountID + "/" + rewardID + "/" + points
         try {
             const response = await fetch(serviceURL2, {
                 method: 'PUT',
@@ -138,7 +138,7 @@
                 var loc = window.location.pathname;
                 var dir = loc.substring(0, loc.lastIndexOf('/'));
                 // change to ip
-                window.location.href = "http://localhost" + dir + "/rewards.php";
+                window.location.href = "http://54.169.136.72" + dir + "/rewards.php";
                     
             }
 

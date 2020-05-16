@@ -188,7 +188,7 @@
     var accountID = ''
     $(async () => {
         var serviceURL =
-            "http://localhost:5001/getCustomerAID/" + username;
+            "http://54.169.136.72:5001/getCustomerAID/" + username;
         // to make the post + lmk ill send code 
         try {
             const response =
