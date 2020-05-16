@@ -7,16 +7,18 @@ async function generateBoss() {
     try {
         const response = await fetch(serviceURL, { method: 'GET' });
         const data = await response.json();
-        console.log(data)
 
         for (x in data) {
 
             /// beauty work here 
             // each round is for one question 
 
-            objectQuestion = data[x]
-            console.log(objectQuestion.answer)
-            console.log(objectQuestion.optionFour)
+            objectQuestion = data[x];
+
+            for (i in objectQuestion) {
+                QNA.push(objectQuestion[i]);
+            }
+            console.log(QNA)
 
         }
     } catch (error) {
