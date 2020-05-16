@@ -19,6 +19,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylequiz.css"/>
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
@@ -54,10 +55,13 @@ if(isset($_SESSION['username'])){
 
             <ul class="list-unstyled components">
                 <p><?=$_SESSION['username'];?></p>
+                <li>
+                    <a href="profile.html">Profile</a>
+                </li>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Games</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li>
+                        <li>
                             <a href="index.php">Region Wars</a>
                         </li>
                         <li>
@@ -67,10 +71,22 @@ if(isset($_SESSION['username'])){
                     </ul>
                 </li>
                 <li>
-                    <a href=#>Transactions</a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Rewards</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="rewards.php">Rewards</a>
+                        </li>
+                        <li>
+                            <a href=#>Vouchers</a>
+                        </li>
+
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">How do I battle?</a>
+                    <a href=#>Wallet</a>
+                </li>
+                <li>
+                    <a href="#">Logout</a>
                 </li>
             </ul>
         </nav>
@@ -96,7 +112,8 @@ if(isset($_SESSION['username'])){
                 </div>
             
             <br>
-            <h2>Transactions Wallet</h2>
+            <img src="img/wallet.png" class="header-image">
+            <p class="header-text">Wallet</p>
 
             <div class="line"></div>
 

@@ -22,6 +22,7 @@ body{
 }
 
 .quiz-home-box{
+    background-color: #ebd8b7;
     text-align: center;
     display: none;
 }
@@ -402,4 +403,16 @@ body{
 .schedule {
     padding: 10px;
     align: center;
+}
+
+.header-image{
+    height: 100px;
+    vertical-align: middle;
+}
+
+.header-text{
+    font-weight: 500;
+    font-size: 40px;
+    color: #000000;
+    display: inline-block;
 }

@@ -53,6 +53,9 @@
 
             <ul class="list-unstyled components">
                 <p><?=$_SESSION['username'];?></p>
+                <li>
+                    <a href="profile.html">Profile</a>
+                </li>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Games</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -66,10 +69,22 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="transactions.php">Transactions</a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Rewards</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="rewards.php">Rewards</a>
+                        </li>
+                        <li>
+                            <a href=#>Vouchers</a>
+                        </li>
+
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">How do I battle?</a>
+                    <a href="transactions.php">Wallet</a>
+                </li>
+                <li>
+                    <a href="#">Logout</a>
                 </li>
             </ul>
         </nav>
@@ -95,14 +110,16 @@
                 </div>
             
             <br>
-            <h2>Region Wars</h2>
+
+            <img src="img/meteorite.png" class="header-image">
+            <p class="header-text">Region Wars</p>
 
             <div class="line"></div>
 
             <body>
 
                 <div class="quiz-home-box custom-box show">
-                    <h4>The Boss is in your region!</h4>
+                    <h4 style="color:black">The Boss is in your region!</h4>
                     <!-- <p>Time left to enter:</p>
                     <div class="time-to-enter">
                             <div class="remaining-time-to-enter"></div>
