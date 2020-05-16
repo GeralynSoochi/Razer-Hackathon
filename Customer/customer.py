@@ -38,7 +38,7 @@ class Customer(db.Model):
             "password": self.password,
             "postalcode": self.postalCode,
             "accountID": self.accountID,
-            "points" : self.points
+            "points" : self.points,
             "encodedKey" : self.encodedKey
         }
         return customer_entry
@@ -75,6 +75,16 @@ def newCustomer(accountID):
 #         return jsonify({"CustomerParticulars":[cb.json() for cb in All_CB ]}), 200
 #     else: 
 #         return jsonify(False), 404
+
+@app.route("/getCustomerAID/<string:username>", methods=["GET"])
+@cross_origin(supports_credentials=True)
+def getCustomerbyUseranme(username):
+    userd = Customer.query.filter_by(username=username).first()
+    if userd:
+        return jsonify(userd.json()), 200
+    else: 
+        return jsonify(False), 404
+
 
 # retrieve a particular customer by postal code 
 @app.route("/getCustomer/<string:accountid>", methods=["GET"])
@@ -118,9 +128,8 @@ def authC(username):
     user = Customer.query.filter_by(username=username).first()
     if user:
         password = (Customer.query.filter_by(username=username).first().password)
-        password = sha256_crypt.unhash(password)
-        
-        if str(password) == str(inputpassword):
+        print (password)
+        if sha256_crypt.verify(inputpassword, password):
             return jsonify({"message": "True"}), 200
         else:
             return jsonify({"message": "Password does not match"}), 404
