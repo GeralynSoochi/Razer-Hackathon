@@ -5,6 +5,7 @@ import json
 import requests
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/redeemRewards/<string:accountID>/<int:rewardID>/<int:points>", methods = ["PUT"])
 def redeemRewards(accountID, rewardID, points):
@@ -21,7 +22,6 @@ def retrieveRedeemableRewards( accountID):
     points = r.json()
     points = points['points']
     r = requests.get ("http://localhost:5002/retrieveRedeemableRewards/" + str(points))
-    print (r.json())
     return jsonify(r.json())
 
 if __name__=='__main__':
