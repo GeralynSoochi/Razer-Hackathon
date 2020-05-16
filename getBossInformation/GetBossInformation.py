@@ -11,10 +11,8 @@ CORS(app)
 @app.route("/getSpawnDate/<string:region>") 
 def getSpawnDate(region): 
     r = requests.get("http://localhost:5004/getSpawnDate/" + region).json()
-    dates = set(r["spawnDate"].split(","))
-    if (date.today().weekday() in dates):
-        return jsonify(True)
-    return jsonify(False)
+    dates = r["spawnDate"].split(",")
+    return jsonify(dates)
 
 @app.route("/getMiniBoss")
 def miniBoss():

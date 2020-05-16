@@ -114,7 +114,6 @@ def getDetails(userid):
     print(type(userid))
     response = requests.get(getAccURL + userid, headers=headers)
     response = response.json()
-    print(response)
     return jsonify(response)
 
 if __name__ == '__main__':
