@@ -2,7 +2,7 @@ var QNA = []
 // retrieve 
 $(async() => {
 
-    var serviceURL = "http://localhost:5003/getMainBoss"
+    var serviceURL = "http://54.169.136.72:5003/getMainBoss"
  
 
     

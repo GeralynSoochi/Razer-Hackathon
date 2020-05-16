@@ -85,7 +85,7 @@
 
     $(async () => {
         var serviceURL =
-            "http://localhost:5001/getCustomerAID/" + username;
+            "http://54.169.136.72:5001/getCustomerAID/" + username;
         // to make the post + lmk ill send code 
         try {
             const response =
@@ -107,7 +107,7 @@
         console.log(postalcode)
 
 
-        var serviceURL = "http://localhost:5004/getCustRegion/" + postalcode
+        var serviceURL = "http://54.169.136.72:5004/getCustRegion/" + postalcode
         try {
             const response = await fetch(serviceURL, {
                 method: 'GET',
@@ -125,7 +125,7 @@
         // get mini boss date + questions
         console.log(region)
 
-        var serviceURL = "http://localhost:5004/getSpawnDate/" + region
+        var serviceURL = "http://54.169.136.72:5004/getSpawnDate/" + region
         try {
             const response = await fetch(serviceURL, {
                 method: 'GET',
@@ -141,7 +141,7 @@
         }
 
         // base on mini boss the questions 
-        var serviceURL = "http://localhost:5009/getMiniBoss"
+        var serviceURL = "http://54.169.136.72:5009/getMiniBoss"
         try {
             const response = await fetch(serviceURL, {
                 method: 'GET',

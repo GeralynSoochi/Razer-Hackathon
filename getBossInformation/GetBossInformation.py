@@ -10,18 +10,18 @@ CORS(app)
 
 @app.route("/getSpawnDate/<string:region>") 
 def getSpawnDate(region): 
-    r = requests.get("http://localhost:5004/getSpawnDate/" + region).json()
+    r = requests.get("http://54.169.136.72:5004/getSpawnDate/" + region).json()
     dates = r["spawnDate"].split(",")
     return jsonify(dates)
 
 @app.route("/getMiniBoss")
 def miniBoss():
-    r = requests.get("http://localhost:5003/getMiniBoss")
+    r = requests.get("http://54.169.136.72:5003/getMiniBoss")
     return jsonify(r.json())
     
 @app.route("/getMainBoss")
 def mainBoss():
-    r = requests.get("http://localhost:5003/getMainBoss")
+    r = requests.get("http://54.169.136.72:5003/getMainBoss")
     return jsonify(r.json())
 
 if __name__=='__main__':

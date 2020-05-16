@@ -146,7 +146,7 @@ if(isset($_SESSION['username'])){
 
                             // retrieve particular info 
                                 $(async() => {
-                                    var serviceURL = "http://localhost:5044/getOverallSavingAccount/" + accountID; 
+                                    var serviceURL = "http://54.169.136.72:5044/getOverallSavingAccount/" + accountID; 
                                     // to make the post + lmk ill send code 
                                     try {
                                         const response =
@@ -169,7 +169,7 @@ if(isset($_SESSION['username'])){
 
                             // retrieve particular info 
                                 $(async() => {
-                                    var serviceURL = "http://localhost:5001/getPoints/" + accountID; 
+                                    var serviceURL = "http://54.169.136.72:5001/getPoints/" + accountID; 
                                     // to make the post + lmk ill send code 
                                     try {
                                         const response =
@@ -227,7 +227,7 @@ if(isset($_SESSION['username'])){
                                                 // retrieve particular info
                                                 $(async () => {
                                                     var serviceURL =
-                                                        "http://localhost:5001/getCustomerAID/" + username;
+                                                        "http://54.169.136.72:5001/getCustomerAID/" + username;
                                                     // to make the post + lmk ill send code 
                                                     try {
                                                         const response =
@@ -246,7 +246,7 @@ if(isset($_SESSION['username'])){
                                                         // ('There is a problem retrieving books data, please try again later.<br />' + error)
                                                     }
                                                     var serviceURL =
-                                                        "http://localhost:5044/getOverallSavingAccount/" +
+                                                        "http://54.169.136.72:5044/getOverallSavingAccount/" +
                                                         accountID;
                                                     // to make the post + lmk ill send code 
                                                     try {
@@ -273,7 +273,7 @@ if(isset($_SESSION['username'])){
                                                 // retrieve particular info 
                                                 $(async () => {
                                                     var serviceURL =
-                                                        "http://localhost:5001/getCustomerAID/" + username;
+                                                        "http://54.169.136.72:5001/getCustomerAID/" + username;
                                                     // to make the post + lmk ill send code 
                                                     try {
                                                         const response =
@@ -291,7 +291,7 @@ if(isset($_SESSION['username'])){
                                                         //  showError
                                                         // ('There is a problem retrieving books data, please try again later.<br />' + error)
                                                     }
-                                                    var serviceURL = "http://localhost:5001/getPoints/" +
+                                                    var serviceURL = "http://54.169.136.72:5001/getPoints/" +
                                                         accountID;
                                                     // to make the post + lmk ill send code 
                                                     try {
@@ -353,7 +353,7 @@ if(isset($_SESSION['username'])){
     }
     async function updatepoints(accountID, points) {
         var serviceURL =
-            "http://localhost:5001/getCustomerAID/" + username;
+            "http://54.169.136.72:5001/getCustomerAID/" + username;
         // to make the post + lmk ill send code 
         try {
             const response =
@@ -371,7 +371,7 @@ if(isset($_SESSION['username'])){
             //  showError
             // ('There is a problem retrieving books data, please try again later.<br />' + error)
         }
-        var serviceURL = "http://localhost:5001/addPoints/" + accountID + "/" + points
+        var serviceURL = "http://54.169.136.72:5001/addPoints/" + accountID + "/" + points
         try {
             const response = await fetch(serviceURL, {
                 method: 'PUT'
@@ -394,7 +394,7 @@ if(isset($_SESSION['username'])){
 
     $(async () => {
         var serviceURL =
-            "http://localhost:5001/getCustomerAID/" + username;
+            "http://54.169.136.72:5001/getCustomerAID/" + username;
         // to make the post + lmk ill send code 
         try {
             const response =
@@ -412,7 +412,7 @@ if(isset($_SESSION['username'])){
             //  showError
             // ('There is a problem retrieving books data, please try again later.<br />' + error)
         }
-        var serviceURL = "http://localhost:5044/getUserTransaction/" + accountID;
+        var serviceURL = "http://54.169.136.72:5044/getUserTransaction/" + accountID;
 
 
 
@@ -516,7 +516,7 @@ if(isset($_SESSION['username'])){
                         var loc = window.location.pathname;
                         var dir = loc.substring(0, loc.lastIndexOf('/'));
                         // change to ip
-                        window.location.href = "http://localhost" + dir + "/transactions.php";
+                        window.location.href = "http://54.169.136.72" + dir + "/transactions.php";
                     }
                     // refresh page 
 
@@ -574,7 +574,7 @@ if(isset($_SESSION['username'])){
 
 
         var serviceURL =
-            "http://localhost:5001/getCustomerAID/" + username;
+            "http://54.169.136.72:5001/getCustomerAID/" + username;
         // to make the post + lmk ill send code 
         try {
             const response =
@@ -593,7 +593,7 @@ if(isset($_SESSION['username'])){
             // ('There is a problem retrieving books data, please try again later.<br />' + error)
         }
 
-        var serviceURL = "http://localhost:5044/createNewTransaction/" + accountID;
+        var serviceURL = "http://54.169.136.72:5044/createNewTransaction/" + accountID;
 
         var requestParam = {
             headers: {
