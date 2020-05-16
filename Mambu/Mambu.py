@@ -11,12 +11,12 @@ app = Flask(__name__)
 CORS(app)
 
 import requests
-@app.route("/registration/", methods = ['POST'])
+@app.route("/registration", methods = ['POST'])
 @cross_origin(supports_credentials=True)
 def registration():
     submitted = request.get_json()
-    # username = submitted["username"]
-    # password = submitted["password"]
+    username = submitted["username"]
+    password = submitted["password"]
     firstName = submitted["firstName"]
     lastName = submitted["lastName"]
     assignedBranchKey = "8a8e878e71c7a4d70171ca4ec7e710c4"
@@ -27,15 +27,14 @@ def registration():
 
     clientID = create_client(firstName, lastName, assignedBranchKey, validUntil, documentId, postalCode, id)
     accountID = createCurrAcc(clientID)
-    #create user in our records
-    # body = {
-    #     "username" : username,
-    #     "password" : password, # need to hash 
-    #     "postalCode" : postalCode,
-    #     "accountID" : createCurrAccount[0]
-
-    # }
-    # r = requests.post ("http://localhost:5001/newUser", body=body)
+    # create user in our records
+    body = {
+        "password" : password, # need to hash 
+        "postalCode" : postalCode,
+        "accountID" : accountID
+    }
+    r = requests.post ("http://localhost:5001/newCustomer/" + username, json= body)
+    print (r.status_code)
     return jsonify(True)
 
 def create_client(firstName, lastName, assignedBranchKey, validUntil, documentId, postalCode, id):  

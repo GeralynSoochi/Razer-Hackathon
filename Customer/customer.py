@@ -17,72 +17,30 @@ class Customer(db.Model):
 
     username = db.Column(db.String(50), primary_key=True)
     password = db.Column(db.String(50), primary_key=False)
-    postalcode = db.Column(db.String(50), nullable=False)
+    postalCode = db.Column(db.String(50), nullable=False)
     accountID = db.Column(db.String(50), nullable=False)
     points = db.Column(db.Integer)
     savingsReward = db.Column(db.Boolean)
 
 
-    def __init__(self, username,password ,postalcode, accountID, savingsReward):
+    def __init__(self, username, password ,postalCode, accountID):
         self.username = username
-        self.postalcode = postalcode
+        self.postalCode = postalCode
         self.password = password
         self.accountID = accountID
         self.points = 0
-        self.savingsReward = savingsReward
+        self.savingsReward = False
 
     def json(self):
         customer_entry = {
             "username": self.username,
             "password": self.password,
-            "postalcode": self.postalcode,
+            "postalcode": self.postalCode,
             "accountID": self.accountID,
             "points" : self.points,
             "savingsReward" : self.savingsReward
         }
         return customer_entry
-
-    def set_username(self, update):
-        self.username = update
-        return True
-    
-    def set_password(self, update):
-        self.password = update
-        return True 
-    
-    def set_postalcode(self, update):
-        self.postalcode = update
-        return True
-    
-    
-class accCb(db.Model):
-    __tablename__ = 'account'
-
-    status = db.Column(db.String(50), primary_key=True)
-    pendingcashback = db.Column(db.Float(2), nullable=True)
-    accountID = db.Column(db.String(50), nullable=True)
-
-
-    def __init__(self, accountID, pendingcashback, status):
-        self.accountID = accountID
-        self.pendingcashback = pendingcashback
-        self.status = status
-
-    def json(self):
-        accCb_entry = {
-            "accountID": self.accountID,
-            "pendingcashback": self.pendingcashback,
-            "status": self.status
-        }
-        return accCb_entry
-
-    def set_pendingcashback(self, update):
-        self.pendingcashback = update
-        return True
-
-    def set_status(self, update):
-        self.status = update
-        return True
 
 # retrieve all customer 
 @app.route("/customers", methods=['GET'])
@@ -90,9 +48,22 @@ def get_all():
     return jsonify({"Customers": [customer.json() for customer in Customer.query.all()]})
 
     
-@app.route("/newCustomer", methods=['POST'])
-def get_all():
-    return jsonify({"Customers": [customer.json() for customer in Customer.query.all()]})
+@app.route("/newCustomer/<string:username>", methods=['POST'])    
+def newCustomer(username):
+    if (Customer.query.filter_by(username=username).first()):
+        return jsonify({"message": "A username with '{}' already exists.".format(username)}), 400
+
+    data = request.get_json()
+    print (data)
+    customer = Customer(username, **data)
+
+    try:
+        db.session.add(customer)
+        db.session.commit()
+    except:
+        return jsonify({"message": "An error occurred creating the account."}), 500
+
+    return jsonify({"success": "Account successfully created"}), 201
 
 # retrieve a particular customer   
 @app.route("/getCustomer/<string:postalcode>", methods=["GET"])
@@ -105,7 +76,7 @@ def getCustomer(accountID):
         return jsonify(False), 404
 
 @app.route("/addPoints/<string:username>/<int:points>", methods=['PUT'])
-def updatePoints(username, points):
+def addPoints(username, points):
     cust = Customer.query.get(username)
     cust.points += points
     db.session.commit()
