@@ -296,28 +296,22 @@ var accountID = "<?php echo $accountID; ?>";
             try {
                 const response = await fetch(serviceURL, requestParam);
                 data = await response.json();
-                console.log(data['message'])
-                authenticated = data['message'];
+                console.log(data)
+                authenticated = data;
             } catch (error) {
             console.error(error);
             }
 
-
-
-            
-
             if(authenticated == "True"){
                 //save username is javascript session
-                sessionStorage.setItem("username",username)
                 // console.log(sessionStorage.getItem("username"))
                 var loc =  window.location.pathname;
                 var dir = loc.substring(0, loc.lastIndexOf('/'));
-
                 // change to ip
-                window.location.href = "http://localhost"+ dir + "/transaction.php";
+                window.location.href = "http://localhost"+ dir + "/transactions.php";
                     
             }else{
-                showError(authenticated)
+              //  showError(authenticated)
             }
 
          });
