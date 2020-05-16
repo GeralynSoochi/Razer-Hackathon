@@ -116,7 +116,7 @@
 
             <div class="line"></div>
 
-            <body>
+            
 
                 <div class="quiz-home-box custom-box show">
                     <h4 style="color:black">The Boss is in your region!</h4>
@@ -177,7 +177,7 @@
                 </div>
 
                 <script src="scriptquiz.js"></script>
-            </body>
+            
 
 
         </div>

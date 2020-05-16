@@ -334,15 +334,6 @@ if(isset($_SESSION['username'])){
                                                     }
                                                 });
                                                 </script>
-
-                                          
-                                            
-
-
-                                    
-                                
-                            
-                        
                     
 
                     <!-- End Right Column -->
