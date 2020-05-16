@@ -6,6 +6,7 @@ import random
 import requests
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/getSpawnDate/<string:region>") 
 def getSpawnDate(region): 

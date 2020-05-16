@@ -85,15 +85,11 @@ def getMainBoss ():
         bossesClass.append(boss.json())
     boss = random.randrange(len(bossesClass))
     if "quiz" in bossesClass[boss]['bossName']:
-        questions = getQuestions()
-        print (questions)
+        questions = {"Questions": [question.json() for question in Questions.query.all()]}
         return jsonify(questions)
     return jsonify(False)
     # add on for the other mainbosses
 
-def getQuestions ():
-    #get 6 question for the fight
-    return jsonify({"Questions": [question.json() for question in Questions.query.all()]})
 
 
 if __name__=='__main__':
