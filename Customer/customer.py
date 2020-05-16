@@ -80,7 +80,7 @@ def addPoints(accountID, points):
     return jsonify(True)
 
 # update points  
-@app.route("/updatePoints/<string:accountID>/<int:points>", methods=['GET'])
+@app.route("/updatePoints/<string:accountID>/<int:points>", methods=['PUT'])
 def updatePoints(accountID, points):
     cust = Customer.query.get(accountID)
     cust.points -= points
