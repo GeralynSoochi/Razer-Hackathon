@@ -1,5 +1,5 @@
 // retrieve 
-async function gernateBoss() {
+async function generateBoss() {
 
     var serviceURL = "http://localhost:5003/getMainBoss"
     var QNA = []
@@ -27,7 +27,7 @@ async function gernateBoss() {
     return QNA;
 }
 
-var displayarray = gernateBoss();
+var displayarray = generateBoss();
 
 
 const questionText = document.querySelector(".question-text");
