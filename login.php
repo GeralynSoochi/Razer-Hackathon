@@ -171,8 +171,6 @@
                 var password = $('#password').val();
                 var username = $('#username').val();
 
-				// hashing is here 
-			
 
                 var requestBody = {
                     "password": password
