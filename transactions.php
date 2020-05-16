@@ -42,7 +42,7 @@ if(isset($_SESSION['accountID'])){
 
 ?>
 <script>
-var accountID = "<?php echo $accountID; ?>";
+var accountID = "<?php echo $accountID; ?>"
 </script>
 
 
@@ -113,67 +113,7 @@ var accountID = "<?php echo $accountID; ?>";
                         <br><br>
               
                         <div id='TransContainer' class="w3-responsive">
-                        <table class="w3-table-all">
-                        <tr id=''>
-                              <!-- <th><h6>Code</h6></th>
-                        <th><h6>Title</h6></th>
-                        <th><h6>Section</h6></th>
-                        </tr> -->
 
-                            <script>    
-                            function dateExtractor(fullDate){
-                                var datefull = new Date(fullDate);
-                                return datefull
-                            }
-
-                            // you need to code outside of this container
-                            
-
-
-                                $(async() => {
-                                    var serviceURL = "http://localhost:5044/getUserTransaction/" + accountID;
-                                  
-                                    try {
-                                        const response =
-                                            await fetch(serviceURL, { method: 'GET' });
-                                        const data = await response.json();
-                                        console.log(data)
-                                        console.log(data['0'].amount)
-
-                                        // GTM + 8 adds to 00 gtm
-                                        var hrs = -(new Date().getTimezoneOffset() / 60)
-                                        console.log(hrs)
-
-
-                                        for(i in data){
-                                            transaction = data[i];
-                                            // convert bookingDate to time 
-                                            fullDate = dateExtractor(transaction.bookingDate)
-
-                                            var panel = `<div 
-                                            class="w3-panel w3-hover-shadow w3-blue w3-card-4">
-                                                                <p style="color:black;"><br/>
-                                            TransactionID: ${transaction.transactionId}<br/>
-                                            Date/Time: ${fullDate.toLocaleString('en-US', { timeZone: 'Asia/Singapore' })}<br/>
-                                            Amount: ${transaction.amount}<br/>
-                                            Comment: ${transaction.comment}<br/>
-                                            </p>
-                                            </div>`
-                                            $("#TransContainer").append(panel)
-                                        
-                                        }
-
-
-                                    } catch (error) {
-                                        showError
-                                            ('There is a problem retrieving books data, please try again later.<br />' + error);
-                                    }
-                                });
-                                </script>
-
-
-
-                        </table>
                         </div>
               
                       </div>
@@ -214,8 +154,8 @@ var accountID = "<?php echo $accountID; ?>";
                                     
 
                                     } catch (error) {
-                                        showError
-                                            ('There is a problem retrieving books data, please try again later.<br />' + error);
+                                      //  showError
+                                           // ('There is a problem retrieving books data, please try again later.<br />' + error)
                                     }
                                 });
                                 </script>
@@ -240,7 +180,11 @@ var accountID = "<?php echo $accountID; ?>";
                             </div>
                             <div><textarea id='notes' name='comments' rows='5' cols='10'></textarea></div>
 
-              
+                            <div id='informationcard'>
+                                
+                            
+                            </div>    
+                            
                             </div>
                           </div>
                         </div>
@@ -259,6 +203,164 @@ var accountID = "<?php echo $accountID; ?>";
             </div>
     </div>
 
+    <script>    
+
+var alltrans = []
+var alldepo = []
+
+// this month and last day of month 
+var todayd = new Date();
+var todaym = todayd.getMonth() + 1;
+var lastday = new Date(todayd.getFullYear(), todayd.getMonth()+1, 0).toString()
+console.log(lastday)
+
+
+
+    function dateExtractor(fullDate){
+        var datefull = new Date(fullDate);
+        return datefull
+    }
+
+
+
+
+    async function updatepoints(accountID){
+
+            var serviceURL = "http://localhost:5001/partCust/" + accountID; 
+                                    // to make the post + lmk ill send code 
+                                    try {
+                                        const response =
+                                        await fetch(serviceURL, { method: 'GET' });
+                                        const data = await response.json();
+                                        console.log(data)
+                                        //console.log(data['0'].amount)
+                                        
+                                    
+
+                                    } catch (error) {
+                                     //   showError
+                                           // ('There is a problem retrieving books data, please try again later.<br />' + error)
+                                    }
+
+
+            }
+
+
+
+
+        $(async() => {
+            var serviceURL = "http://localhost:5044/getUserTransaction/" + accountID;
+            
+                
+
+            try {
+                const response =
+                    await fetch(serviceURL, { method: 'GET' });
+                const data = await response.json();
+                console.log(data)
+                console.log(data['0'].amount)
+
+                // GTM + 8 adds to 00 gtm
+                var hrs = -(new Date().getTimezoneOffset() / 60)
+                console.log(hrs)
+
+
+
+                for(i in data){
+                    transaction = data[i];
+                    // convert bookingDate to time 
+                    fullDate = dateExtractor(transaction.bookingDate)
+                    positivetransfer = 0 
+                    //positive the values 
+                    if( transaction.amount < 0 ){
+                        positivetransfer = 1
+                    }
+
+                    // if the data is this month = add to this counter 
+                    var transm = fullDate.getMonth()+1
+                    if(transm == todaym){
+
+                        if(transaction.type == 'TRANSFER'){
+                        alltrans.push(transaction.amount)
+                        }else{
+                        alldepo.push(transaction.amount)
+                        }
+
+                    }
+                    
+                    if(positivetransfer == 1){
+                        var panel = `<div 
+                    class="w3-panel w3-hover-shadow w3-blue w3-card-4">
+                    <p style="color:black;"><br/>
+                    TransactionID: ${transaction.transactionId}<br/>
+                    Date/Time: ${fullDate.toLocaleString('en-US', { timeZone: 'Asia/Singapore' })}<br/>
+                    Amount: <b style='color:red;'> ${transaction.amount * -1}</b><br/>
+                    Comment: ${transaction.comment}<br/>
+                    </p>
+                    </div>`
+                    $("#TransContainer").append(panel)
+                    }else{
+                        var panel = `<div 
+                    class="w3-panel w3-hover-shadow w3-blue w3-card-4">
+                     <p style="color:black;"><br/>
+                    TransactionID: ${transaction.transactionId}<br/>
+                    Date/Time: ${fullDate.toLocaleString('en-US', { timeZone: 'Asia/Singapore' })}<br/>
+                    Amount: ${transaction.amount}<br/>
+                    Comment: ${transaction.comment}<br/>
+                    </p>
+                    </div>`
+                    $("#TransContainer").append(panel)
+                    }
+
+                    
+                
+                }
+
+            
+                console.log(lastday) 
+                var sumdepo = 0
+                var sumtrans = 0
+            for(x in alldepo){
+                sumdepo += parseInt(alldepo[x], 10)
+            }
+            for(x in alltrans){
+                sumtrans += parseInt(alltrans[x], 10)
+            }
+            sumtrans = sumtrans * -1
+
+            var panelDepo = `<div class="w3-card">
+                                <p>
+                                ${sumdepo}
+                                </p>
+                                </div>`
+
+            var paneltrans = `<div class="w3-card">
+                                <p
+                                ${sumtrans}
+                                </p>
+                                </div>`
+
+                                
+            $("#informationcard").append(panelDepo)
+                                
+            $("#informationcard").append(paneltrans)
+                           
+            if(todayd == todayd){
+               sumdepo =  sumdepo - sumtrans
+               if(sumdepo >= 50){
+
+                // call the async function 
+                updatepoints(accountID)
+               }
+            }
+
+            } catch (error) {
+               // showError
+                    //('There is a problem retrieving books data, please try again later.<br />' + error);
+            }
+        });
+
+        </script>
     <!--Process transaction submit data to mambu redirect user with the success msg -->
                                 
  
@@ -343,7 +445,15 @@ var accountID = "<?php echo $accountID; ?>";
          });
  
     
+         // update the eligibility her
+         // get the last day of the month 
+    
     </script>
+
+    <script>
+
+    </script>
+
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->
