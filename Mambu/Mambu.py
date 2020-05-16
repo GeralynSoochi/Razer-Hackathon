@@ -62,7 +62,7 @@ def create_client(firstName, lastName, assignedBranchKey, validUntil, documentId
 
 def createCurrAcc(clientID):
     createCAccURL = "https://razerhackathon.sandbox.mambu.com/api/savings"
-    getCAccURL = "https://razerhackathon.sandbox.mambu.com/api/clients/"
+    
     submitted = request.get_json()
 
     payload = "{\n    \"savingsAccount\": {\n        \"name\": \"Digital Account\",\n        \"accountHolderType\": \"CLIENT\",\n        \"accountHolderKey\": "+ clientID + ",\n        \"accountState\": \"APPROVED\",\n        \"productTypeKey\": \"8a8e878471bf59cf0171bf6979700440\",\n        \"accountType\": \"CURRENT_ACCOUNT\",\n        \"currencyCode\": \"SGD\",\n        \"allowOverdraft\": \"true\",\n        \"overdraftLimit\": \"100\",\n        \"overdraftInterestSettings\": {\n            \"interestRate\": 5\n        },\n            \"interestSettings\": {\n        \"interestRate\": \"1.25\"\n    }\n    }\n\n}"
@@ -91,12 +91,27 @@ def createCurrAcc(clientID):
 # get user's current account
 @app.route("/currentacc/getUser/<string:username>", methods=['GET'])
 def getUserAccs(username):
+    getCAccURL = "https://razerhackathon.sandbox.mambu.com/api/clients/"
+
     headers = {
     'Authorization': 'Basic VGVhbTE2OnBhc3MxRjNFN0E3MkU=',
     'Cookie': 'AWSALB=SCyLu8+OuTImLlfP1eh8nql91Ct7//I2pMraeyFdy6nAq9oO2gfqwYQpcALP/X7oW9Z48YY6yPK2VZb4dF/whA21klZ3Qi3vs3BU6uZ9nNyWhQwxPOqO1KKTaoIz; AWSALBCORS=SCyLu8+OuTImLlfP1eh8nql91Ct7//I2pMraeyFdy6nAq9oO2gfqwYQpcALP/X7oW9Z48YY6yPK2VZb4dF/whA21klZ3Qi3vs3BU6uZ9nNyWhQwxPOqO1KKTaoIz'
     }
     response = requests.get(getCAccURL + username + "/savings/", headers=headers)
     response = response.json() #this is a list (for future references)
+    return jsonify(response)
+
+@app.route("/getDetails/<string:userid>", methods=['GET'])
+def getDetails(userid):
+    getAccURL = "https://razerhackathon.sandbox.mambu.com/api/clients/"
+    
+    headers = {
+    'Authorization': 'Basic VGVhbTE2OnBhc3MxRjNFN0E3MkU=',
+    'Cookie': 'AWSALB=SCyLu8+OuTImLlfP1eh8nql91Ct7//I2pMraeyFdy6nAq9oO2gfqwYQpcALP/X7oW9Z48YY6yPK2VZb4dF/whA21klZ3Qi3vs3BU6uZ9nNyWhQwxPOqO1KKTaoIz; AWSALBCORS=SCyLu8+OuTImLlfP1eh8nql91Ct7//I2pMraeyFdy6nAq9oO2gfqwYQpcALP/X7oW9Z48YY6yPK2VZb4dF/whA21klZ3Qi3vs3BU6uZ9nNyWhQwxPOqO1KKTaoIz'
+    }
+    response = requests.get(getAccURL + userid, headers=headers)
+    response = response.json()
+    print(response)
     return jsonify(response)
 
 if __name__ == '__main__':

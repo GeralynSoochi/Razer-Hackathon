@@ -65,13 +65,23 @@ def newCustomer(accountID):
 
     return jsonify({"success": "Account successfully created"}), 201
 
-# retrieve a particular customer   
-@app.route("/getCustomer/<string:postalcode>", methods=["GET"])
+# retrieve a particular customer by postal code 
+# @app.route("/getCustomer/<string:postalcode>", methods=["GET"])
+# @cross_origin(supports_credentials=True)
+# def getCustomer(accountID):
+#     All_CB = Customer.query.filter_by(accountID=accountID).all()
+#     if All_CB:
+#         return jsonify({"CustomerParticulars":[cb.json() for cb in All_CB ]}), 200
+#     else: 
+#         return jsonify(False), 404
+
+# retrieve a particular customer by postal code 
+@app.route("/getCustomer/<string:accountid>", methods=["GET"])
 @cross_origin(supports_credentials=True)
 def getCustomer(accountID):
-    All_CB = Customer.query.filter_by(accountID=accountID).all()
+    All_CB = Customer.query.filter_by(accountID=accountID).first()
     if All_CB:
-        return jsonify({"CustomerParticulars":[cb.json() for cb in All_CB ]}), 200
+        return jsonify(All_CB.json()), 200
     else: 
         return jsonify(False), 404
 
