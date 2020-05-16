@@ -85,6 +85,11 @@ class accCb(db.Model):
 def get_all():
     return jsonify({"Customers": [customer.json() for customer in Customer.query.all()]})
 
+    
+@app.route("/newCustomer", methods=['POST'])
+def get_all():
+    return jsonify({"Customers": [customer.json() for customer in Customer.query.all()]})
+
 # retrieve a particular customer   
 @app.route("/getCustomer/<string:postalcode>", methods=["GET"])
 @cross_origin(supports_credentials=True)
@@ -95,7 +100,6 @@ def getCustomer(accountID):
     else: 
         return jsonify(False), 404
 
-
 # update points  
 @app.route("/updatePoints/<string:username>/<int:points>", methods=['PUT'])
 def updatePoints(username, points):
@@ -103,8 +107,6 @@ def updatePoints(username, points):
     cust.points -= points
     db.session.commit()
     return jsonify(True)
-
-
 
 # Creating a new Customer Record , not sure how the data gonna be passed 
 # rmb account id is created ussing UUID lmk who is doing this i can provide the code 

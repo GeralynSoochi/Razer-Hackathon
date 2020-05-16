@@ -17,6 +17,6 @@ CREATE TABLE customer (
     password VARCHAR(50) NOT NULL,
     postalcode CHAR(6) NOT NULL,
     accountID VARCHAR(50),
-    points INT NOT NULL,
+    points INT NOT NULL DEFAULT 0 ,
     PRIMARY KEY (username)
 ) ;
