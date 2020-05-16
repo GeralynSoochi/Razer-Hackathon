@@ -66,12 +66,13 @@ class regionMap(db.Model):
 @cross_origin(supports_credentials=True)
 def getRegionMap(postalcode):
     f2 = postalcode[0] + postalcode[1] 
-    allRegions = regionMap.query.filter_by(postalcode=f2).all()
-    regionID = [regionid.regionID for regionid in allRegions if regionid.postalcode == f2]
-    Regionname = Region.query.filter_by(regionID=regionID[0]).all()
+    allRegions = regionMap.query.filter_by(postalcode=f2).first()
+    regionID = allRegions.regionID
+    reg = Region.query.filter_by(regionID = regionID).first()
+    print (reg)
 
-    if Regionname:
-        return jsonify({"RegionName":[RN.json() for RN in Regionname]}),200
+    if reg:
+        return jsonify({"RegionName" : reg.regionName}),200
     else: 
         return jsonify(False), 404
 
