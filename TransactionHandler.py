@@ -15,11 +15,11 @@ CORS(app)
 def createNewTransaction(accountID):
     transactionInfo = request.get_json()
     transactionInfo = json.loads(json.dumps(transactionInfo,default=str))
-    createStatus = requests.post("https://razerhackathon.sandbox.mambu.com/api/savings/"+ accountID +"/transactions"    , json = transactionInfo)
-    print(createStatus)
+    createStatus = requests.post("https://razerhackathon.sandbox.mambu.com/api/savings/"+ accountID +"/transactions"    , json = transactionInfo, auth=('Team16', 'pass1F3E7A72E'))
+    print(createStatus.text)
     if createStatus.status_code == 201:
-        return True
-    return False
+        return jsonify(True)
+    return jsonify(False)
 
 # retrieve all the trasaction details to UI 
 @app.route("/getUserTransaction/<string:accountID>", methods=['GET'])
