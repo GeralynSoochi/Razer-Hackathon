@@ -42,7 +42,7 @@ if(isset($_SESSION['accountID'])){
 
 ?>
 <script>
-var accountID = "<?php echo $accountID; ?>"
+var accountID = "<?php echo $accountID; ?>";
 </script>
 
 
@@ -205,160 +205,165 @@ var accountID = "<?php echo $accountID; ?>"
 
     <script>    
 
-var alltrans = []
-var alldepo = []
+        var alltrans = []
+        var alldepo = []
 
-// this month and last day of month 
-var todayd = new Date();
-var todaym = todayd.getMonth() + 1;
-var lastday = new Date(todayd.getFullYear(), todayd.getMonth()+1, 0).toString()
-console.log(lastday)
+        // this month and last day of month 
+        var todayd = new Date();
+        var todaym = todayd.getMonth() + 1;
+        var lastday = new Date(todayd.getFullYear(), todayd.getMonth()+1, 0).toString()
 
-
-
-    function dateExtractor(fullDate){
-        var datefull = new Date(fullDate);
-        return datefull
-    }
+        console.log(lastday)
 
 
 
-
-    async function updatepoints(accountID){
-
-            var serviceURL = "http://localhost:5001/partCust/" + accountID; 
-                                    // to make the post + lmk ill send code 
-                                    try {
-                                        const response =
-                                        await fetch(serviceURL, { method: 'GET' });
-                                        const data = await response.json();
-                                        console.log(data)
-                                        //console.log(data['0'].amount)
-                                        
-                                    
-
-                                    } catch (error) {
-                                     //   showError
-                                           // ('There is a problem retrieving books data, please try again later.<br />' + error)
-                                    }
-
-
+            function dateExtractor(fullDate){
+                var datefull = new Date(fullDate);
+                return datefull
             }
 
 
 
 
-        $(async() => {
-            var serviceURL = "http://localhost:5044/getUserTransaction/" + accountID;
-            
-                
+                async function updatepoints(accountID){
 
-            try {
-                const response =
-                    await fetch(serviceURL, { method: 'GET' });
-                const data = await response.json();
-                console.log(data)
-                console.log(data['0'].amount)
+                        var serviceURL = "http://localhost:5001/partCust/" + accountID 
+                                                try {
+                                                    const response = await fetch(serviceURL, { method: 'GET' });
+                                                    const data = await response.json();
+                                                    console.log(data)
+                                                    //console.log(data['0'].amount);
+                                                    // call the add points here and return true 
 
-                // GTM + 8 adds to 00 gtm
-                var hrs = -(new Date().getTimezoneOffset() / 60)
-                console.log(hrs)
+                                                    // go to line 
+
+                                                } catch (error) {
+                                                //   showError
+                                                    // ('There is a problem retrieving books data, please try again later.<br />' + error)
+                                                }
 
 
-
-                for(i in data){
-                    transaction = data[i];
-                    // convert bookingDate to time 
-                    fullDate = dateExtractor(transaction.bookingDate)
-                    positivetransfer = 0 
-                    //positive the values 
-                    if( transaction.amount < 0 ){
-                        positivetransfer = 1
-                    }
-
-                    // if the data is this month = add to this counter 
-                    var transm = fullDate.getMonth()+1
-                    if(transm == todaym){
-
-                        if(transaction.type == 'TRANSFER'){
-                        alltrans.push(transaction.amount)
-                        }else{
-                        alldepo.push(transaction.amount)
                         }
 
-                    }
-                    
-                    if(positivetransfer == 1){
-                        var panel = `<div 
-                    class="w3-panel w3-hover-shadow w3-blue w3-card-4">
-                    <p style="color:black;"><br/>
-                    TransactionID: ${transaction.transactionId}<br/>
-                    Date/Time: ${fullDate.toLocaleString('en-US', { timeZone: 'Asia/Singapore' })}<br/>
-                    Amount: <b style='color:red;'> ${transaction.amount * -1}</b><br/>
-                    Comment: ${transaction.comment}<br/>
-                    </p>
-                    </div>`
-                    $("#TransContainer").append(panel)
-                    }else{
-                        var panel = `<div 
-                    class="w3-panel w3-hover-shadow w3-blue w3-card-4">
-                     <p style="color:black;"><br/>
-                    TransactionID: ${transaction.transactionId}<br/>
-                    Date/Time: ${fullDate.toLocaleString('en-US', { timeZone: 'Asia/Singapore' })}<br/>
-                    Amount: ${transaction.amount}<br/>
-                    Comment: ${transaction.comment}<br/>
-                    </p>
-                    </div>`
-                    $("#TransContainer").append(panel)
-                    }
 
-                    
-                
-                }
 
-            
-                console.log(lastday) 
-                var sumdepo = 0
-                var sumtrans = 0
-            for(x in alldepo){
-                sumdepo += parseInt(alldepo[x], 10)
-            }
-            for(x in alltrans){
-                sumtrans += parseInt(alltrans[x], 10)
-            }
-            sumtrans = sumtrans * -1
 
-            var panelDepo = `<div class="w3-card">
-                                <p>
-                                ${sumdepo}
+                    $(async() => {
+                        var serviceURL = "http://localhost:5044/getUserTransaction/" + accountID;
+                        
+                            
+
+                        try {
+                            const response =
+                                await fetch(serviceURL, { method: 'GET' });
+                            const data = await response.json();
+                            console.log(data)
+                            console.log(data['0'].amount)
+
+                            // GTM + 8 adds to 00 gtm
+                            var hrs = -(new Date().getTimezoneOffset() / 60)
+                            console.log(hrs)
+                            for(i in data){
+                                transaction = data[i];
+                                // convert bookingDate to time 
+                                fullDate = dateExtractor(transaction.bookingDate)
+                                positivetransfer = 0 
+                                //positive the values 
+                                if( transaction.amount < 0 ){
+                                    positivetransfer = 1
+                                }
+
+                                // if the data is this month = add to this counter 
+                                var transm = fullDate.getMonth()+1
+                                if(transm == todaym){
+
+                                    if(transaction.type == 'TRANSFER'){
+                                    alltrans.push(transaction.amount)
+                                    }else{
+                                    alldepo.push(transaction.amount)
+                                    }
+
+                                }
+                                
+                                if(positivetransfer == 1){
+                                    var panel = `<div 
+                                class="w3-panel w3-hover-shadow w3-blue w3-card-4">
+                                <p style="color:black;"><br/>
+                                TransactionID: ${transaction.transactionId}<br/>
+                                Date/Time: ${fullDate.toLocaleString('en-US', { timeZone: 'Asia/Singapore' })}<br/>
+                                Amount: <b style='color:red;'> ${transaction.amount * -1}</b><br/>
+                                Comment: ${transaction.comment}<br/>
                                 </p>
                                 </div>`
-
-            var paneltrans = `<div class="w3-card">
-                                <p
-                                ${sumtrans}
+                                $("#TransContainer").append(panel)
+                                }else{
+                                    var panel = `<div 
+                                class="w3-panel w3-hover-shadow w3-blue w3-card-4">
+                                <p style="color:black;"><br/>
+                                TransactionID: ${transaction.transactionId}<br/>
+                                Date/Time: ${fullDate.toLocaleString('en-US', { timeZone: 'Asia/Singapore' })}<br/>
+                                Amount: ${transaction.amount}<br/>
+                                Comment: ${transaction.comment}<br/>
                                 </p>
                                 </div>`
+                                $("#TransContainer").append(panel)
+                                }
 
                                 
-            $("#informationcard").append(panelDepo)
-                                
-            $("#informationcard").append(paneltrans)
-                           
-            if(todayd == todayd){
-               sumdepo =  sumdepo - sumtrans
-               if(sumdepo >= 50){
+                            
+                            }
 
-                // call the async function 
-                updatepoints(accountID)
-               }
-            }
+                        
+                            console.log(lastday) 
+                            var sumdepo = 0
+                            var sumtrans = 0
+                        for(x in alldepo){
+                            sumdepo += parseInt(alldepo[x], 10)
+                        }
+                        for(x in alltrans){
+                            sumtrans += parseInt(alltrans[x], 10)
+                        }
+                        sumtrans = sumtrans * -1
 
-            } catch (error) {
-               // showError
-                    //('There is a problem retrieving books data, please try again later.<br />' + error);
-            }
-        });
+                        var panelDepo = `<div class="w3-card">
+                                            <p>
+                                            ${sumdepo}
+                                            </p>
+                                            </div>`
+
+                        var paneltrans = `<div class="w3-card">
+                                            <p
+                                            ${sumtrans}
+                                            </p>
+                                            </div>`
+
+                                            
+                        $("#informationcard").append(panelDepo)
+                                            
+                        $("#informationcard").append(paneltrans)
+                                    
+                        if(todayd == todayd){
+                        sumdepo =  sumdepo - sumtrans
+                        if(sumdepo >= 50){
+
+                            // call the async function
+                            var updated =  updatepoints(accountID)
+                            if(updated == true){
+                                var loc =  window.location.pathname;
+                                var dir = loc.substring(0, loc.lastIndexOf('/'));
+                            // change to ip
+                        // window.location.href = "http://localhost"+ dir + "/transactions.php";
+                            }
+                            // refresh page 
+
+                        }
+                        }
+
+                        } catch (error) {
+                        // showError
+                                //('There is a problem retrieving books data, please try again later.<br />' + error);
+                        }
+                    });
 
         </script>
     <!--Process transaction submit data to mambu redirect user with the success msg -->
