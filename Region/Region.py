@@ -69,9 +69,8 @@ def getRegionMap(postalcode):
     allRegions = regionMap.query.filter_by(postalcode=f2).all()
     regionID = [regionid.regionID for regionid in allRegions if regionid.postalcode == f2]
     Regionname = Region.query.filter_by(regionID=regionID[0]).all()
-
     if Regionname:
-        return jsonify({"RegionName":[RN.json() for RN in Regionname]}),200
+        return jsonify(Regionname),200
     else: 
         return jsonify(False), 404
 
