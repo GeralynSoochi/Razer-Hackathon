@@ -98,14 +98,15 @@ def getPoints(accountID):
 
 
 #retreive a list of customer cashbacks
-@app.route("/oneCustomerCb/<string:accountID>", methods=['GET'])
+@app.route("/partCust/<string:accountID>", methods=['GET'])
 @cross_origin(supports_credentials=True)
-def particularCashBack(accountID):
-    All_CB = accCb.query.filter_by(accountID=accountID).all()
+def partCust(accountID):
+    All_CB = Customer.query.filter_by(accountID=accountID).all()
     if All_CB:
-        return jsonify({"CashBacks":[cb.json() for cb in All_CB]}), 200
+        return jsonify({"Cust":[cb.json() for cb in All_CB]}), 200
     else: 
         return jsonify(False), 404
+
 
 if __name__=='__main__':
     app.run(host='0.0.0.0',port=5001, debug=True)
