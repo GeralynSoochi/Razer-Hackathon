@@ -72,12 +72,9 @@ class rewards(db.Model):
         }
         return reward_mast_entry
 
-@app.route("/retrieveRedeemableRewards/<string:accountID>")
-def retrieveRedeemableRewards( accountID):
+@app.route("/retrieveRedeemableRewards/<int:points>")
+def retrieveRedeemableRewards( points):
     # retrieve user information 
-    r = requests.get ( "http://localhost:5001/getPoints/" + accountID)
-    points = r.json()
-    points = points['points']
     rwds = rewards.query.filter(points >= rewards.rewardValue, rewards.bossID.is_(None), rewards.quantity > 0).all()
     r = []
     for rwd in rwds:
