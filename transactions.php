@@ -226,17 +226,18 @@ var accountID = "<?php echo $accountID; ?>";
                             
                             <br>
                             <div>
-                            <input type='text' id='DepositAmount' name='DepositAmount'>
-                            <button id="DepositBtn" value="Transfer" class="w3-button rounded-pill">Deposit</button>
-                       
+                            <select id='type'>
+                                <option value='Transfer'>Transfer</option>
+                                <option value='Deposit'>Deposit</option>
+                            </select>
                             </div>
                             <div>
-                            <input type='text' id='' name='TransferAmount' placeholder='Transfer Amount'>
-                            <input type='text' id='' name='TransferAmount' placeholder='Transfer Account Here'>
-                            
-                            <button id="TransferBtn" value="Transfer" class="w3-button rounded-pill">Transfer</button>
+                            <input type='text' id='Amount' name='DepositAmount'>
                             </div>
-
+                            <div>
+                            <input type='text' id='accountno' name='accountno' placeholder='Transfer Account Here'>
+                            <button id="TransactionBtn" value="Transfer" class="w3-button rounded-pill">OKay</button>
+                            </div>
                             <div><textarea id='notes' name='comments' rows='5' cols='10'></textarea></div>
 
               
@@ -262,14 +263,18 @@ var accountID = "<?php echo $accountID; ?>";
                                 
  
     <script>    
-        $('#DepositBtn').click(async(event) => {
-            var amount = $('#DepositAmount').val();
+       
+     $('#TransactionBtn').click(async(event) => {
+
+        //options value 
+        
+        var transType = $('#type').val();
+
+        console.log(transType)
+
+        if(transType == 'Deposit'){
+            var amount = $('#Amount').val();
             var notes = $('#notes').val();
-            // not sure if bank need var bank = $('#bank').val();
-            // hashing is here 
-
-            // if amount is number then pass 
-
             var requestBody = {
                     "amount": amount,
                     "notes": notes,
@@ -282,63 +287,25 @@ var accountID = "<?php echo $accountID; ?>";
                         }
                     ]
                 }
-            
-
-            var serviceURL = "http://localhost:5044/createNewTransaction/" + accountID;
-                    
-            var requestParam = {
-                headers: {  "Content-Type": "application/json" },
-                method: 'POST',
-                mode: 'cors',
-                body: JSON.stringify(requestBody)
-            }
-
-            var authenticated = "False";
-
-            try {
-                const response = await fetch(serviceURL, requestParam);
-                data = await response.json();
-                console.log(data)
-                authenticated = data;
-            } catch (error) {
-            console.error(error);
-            }
-
-            if(authenticated == "True"){
-                //save username is javascript session
-                // console.log(sessionStorage.getItem("username"))
-                var loc =  window.location.pathname;
-                var dir = loc.substring(0, loc.lastIndexOf('/'));
-                // change to ip
-                window.location.href = "http://localhost"+ dir + "/transactions.php";
-                    
-            }else{
-              //  showError(authenticated)
-            }
-
-         });
-     // retrieve particular info 
-
-     $('#DepositBtn').click(async(event) => {
-            var amount = $('#WithdrawAmount').val();
+        }else{
+            var amount = $('#Amount').val();
+            var Toaccount = $('#accountno').val();
             var notes = $('#notes').val();
             // not sure if bank need var bank = $('#bank').val();
             // hashing is here 
 
-            // if amount is number then pass 
-
+            // if amount is number then pass && client ID is different then pass  
             var requestBody = {
-                    "amount": "20",
-                    "notes": "HI",
-                    "type": "DEPOSIT",
-                    "method": "bank",
-                    "customInformation": [
-                        {
-                            "value": "unique identifier for receipt",
-                            "customFieldID": "IDENTIFIER_TRANSACTION_CHANNEL_I"
-                        }
-                    ]
+                    "type": "TRANSFER",
+                    "amount": amount ,
+                    "notes": notes,
+                    "toSavingsAccount": Toaccount,
+                    "method":"bank"
                 }
+
+        }
+
+           
             
 
             var serviceURL = "http://localhost:5044/createNewTransaction/" + accountID;
@@ -367,7 +334,7 @@ var accountID = "<?php echo $accountID; ?>";
                 var loc =  window.location.pathname;
                 var dir = loc.substring(0, loc.lastIndexOf('/'));
                 // change to ip
-                window.location.href = "http://localhost"+ dir + "/transactions.php";
+               // window.location.href = "http://localhost"+ dir + "/transactions.php";
                     
             }else{
               //  showError(authenticated)
