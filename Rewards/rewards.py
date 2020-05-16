@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
 import json
+import requests
 
 
 # ==================================== CONNECTION SPECIFICATION ====================================== #
@@ -71,8 +72,12 @@ class rewards(db.Model):
         }
         return reward_mast_entry
 
-@app.route("/retrieveRedeemableRewards/<int:points>")
-def retrieveRedeemableRewards(points):
+@app.route("/retrieveRedeemableRewards/<string:accountID>")
+def retrieveRedeemableRewards( accountID):
+    # retrieve user information 
+    r = requests.get ( "http://localhost:5001/getPoints/" + accountID)
+    points = r.json()
+    points = points['points']
     rwds = rewards.query.filter(points >= rewards.rewardValue, rewards.bossID.is_(None), rewards.quantity > 0).all()
     r = []
     for rwd in rwds:
