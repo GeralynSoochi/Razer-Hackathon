@@ -58,7 +58,7 @@ if(isset($_SESSION['username'])){
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="index.html">Region Wars</a>
+                            <a href="index.php">Region Wars</a>
                         </li>
 
                     </ul>
@@ -99,12 +99,13 @@ if(isset($_SESSION['username'])){
 
                 <!-- The Grid -->
                 <div class="w3-row">
+
                   <!-- Left Column -->
                   <div class="w3-col m6">
               
                     <!--  --> 
                     <div class="w3-card w3-round w3-white">
-                      <div class="w3-container w3-padding">
+                      <div class="w3-container w3-padding"><br>
                        <h5>Inflow & Outflow</h5>
               
                         <br>
@@ -128,14 +129,14 @@ if(isset($_SESSION['username'])){
                   </div>
                   
                   <!-- Right Column -->
-                  <div class="w3-col m4">
+                  <div class="w3-col m6">
                   
                     <div class="w3-row-padding">
               
-                      <div class="w3-col m12">
+                      <div class="w3-col m13">
                       <!-- Savings -->
                         <div class="w3-card w3-round w3-white">
-                          <div class="w3-container w3-padding">
+                          <div class="w3-container w3-padding"> <br>
                           <h5>Savings</h5>
                             <fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
                             <div data-role = "fieldcontain">
@@ -191,41 +192,27 @@ if(isset($_SESSION['username'])){
                             
                             <br>
                             <div>
-                            <select id='type'>
+                            <select class="form-control rounded-pill" id='type'>
+                                <option selected disabled>--Select--</option>
                                 <option value='Transfer'>Transfer</option>
                                 <option value='Deposit'>Deposit</option>
-                            </select>
+                            </select><br>
                             </div>
                             <div>
-                            <input type='text' id='Amount' name='DepositAmount' placeholder='DepositAmount'>
-                            </div>
+                            <input class="form-control rounded-pill" type='text' id='Amount' name='DepositAmount' placeholder='DepositAmount'>
+                            </div><br>
                             <div>
-                            <input type='text' id='accountno' name='accountno' placeholder='Transfer Account Here'>
-                            <button id="TransactionBtn" value="Transfer" class="w3-button rounded-pill">Deposit</button>
-                            </div>
+                            <input class="form-control rounded-pill" type='text' id='accountno' name='accountno' placeholder='Transfer Account Here'>
+                            <br>
+                            <button id="TransactionBtn" value="Transfer" class="w3-button w3-indigo rounded-pill">Deposit</button>
+                            </div><br>
                         </div>
                         <br>
 
                         <!-- End Left Column -->
                     </div>
 
-                    <!-- Right Column -->
-                    <div class="w3-col m8">
-
-                        <div class="w3-row-padding">
-
-                            <div class="w3-col m12">
-                                <!-- Savings -->
-                                <div class="w3-card w3-round w3-white">
-                                    <div class="w3-container w3-padding">
-                                        <h5>Savings</h5>
-                                        <fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
-                                            <div data-role="fieldcontain">
-
-                                                <label id="balanceContainer"></label>
-                                                <script>
-
-                                                </script>
+                   
 
 
                                                 <script>
@@ -327,49 +314,27 @@ if(isset($_SESSION['username'])){
                                                 });
                                                 </script>
 
-                                            </div>
-
-                                            <br>
-                                            <div>
-                                                <select id='type'>
-                                                    <option value='Transfer'>Transfer</option>
-                                                    <option value='Deposit'>Deposit</option>
-                                                </select>
-                                            </div>
-                                            <div>
-                                                <input type='text' id='Amount' name='DepositAmount'>
-                                            </div>
-                                            <div>
-                                                <input type='text' id='accountno' name='accountno'
-                                                    placeholder='Transfer Account Here'>
-                                                <button id="TransactionBtn" value="Transfer"
-                                                    class="w3-button rounded-pill">OKay</button>
-                                            </div>
-                                            <div><textarea id='notes' name='comments' rows='5' cols='10'></textarea>
-                                            </div>
-
-                                            <div id='informationcard'>
+                                          
+                                            
 
 
-                                            </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                    
+                                
+                            
+                        
+                    
 
                     <!-- End Right Column -->
-                </div>
+                
 
                 <!-- End Grid -->
-            </div>
+           
 
             <!-- End Page Container -->
-        </div>
+        
 
-    </div>
-    </div>
+   
+    
 
     <script>
     var alltrans = []
@@ -486,26 +451,26 @@ if(isset($_SESSION['username'])){
                 }
 
                 if (positivetransfer == 1) {
-                    var panel = `<div 
-                                class="w3-panel w3-hover-shadow w3-blue w3-card-4">
+                    var panel = `<tr><td><div 
+                                class="custom-box">
                                 <p style="color:black;"><br/>
                                 TransactionID: ${transaction.transactionId}<br/>
                                 Date/Time: ${fullDate.toLocaleString('en-US', { timeZone: 'Asia/Singapore' })}<br/>
                                 Amount: <b style='color:red;'> ${transaction.amount * -1}</b><br/>
                                 Comment: ${transaction.comment}<br/>
                                 </p>
-                                </div>`
+                                </div></td></tr>`
                     $("#TransContainer").append(panel)
                 } else {
-                    var panel = `<div 
-                                class="w3-panel w3-hover-shadow w3-blue w3-card-4">
+                    var panel = `<tr><td><div 
+                                class="custom-box">
                                 <p style="color:black;"><br/>
                                 TransactionID: ${transaction.transactionId}<br/>
                                 Date/Time: ${fullDate.toLocaleString('en-US', { timeZone: 'Asia/Singapore' })}<br/>
                                 Amount: ${transaction.amount}<br/>
                                 Comment: ${transaction.comment}<br/>
                                 </p>
-                                </div>`
+                                </div></td></tr>`
                     $("#TransContainer").append(panel)
                 }
 

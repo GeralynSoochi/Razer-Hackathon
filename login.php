@@ -203,7 +203,7 @@
 					var loc =  window.location.pathname;
 					var dir = loc.substring(0, loc.lastIndexOf('/'));
 
-					window.location.href = "http://localhost/"+ dir + "/index.html?user=" + username;
+					window.location.href = "http://localhost/"+ dir + "/index.php?username=" + username;
 						
 						
 				}else{
