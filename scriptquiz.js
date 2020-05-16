@@ -1,35 +1,40 @@
+var QNA = []
 // retrieve 
-async function generateBoss() {
+$(async() => {
 
     var serviceURL = "http://localhost:5003/getMainBoss"
-    var QNA = []
+ 
 
+    
     try {
         const response = await fetch(serviceURL, { method: 'GET' });
         const data = await response.json();
+        console.log(data)
 
-        for (x in data) {
+        for (var i = 0 ; i < data['Questions'].length; i++) {
+            var question1 = []
+            console.log(data['Questions'][i].questionPrompt)
 
-            /// beauty work here 
-            // each round is for one question 
+            Question = data['Questions'][i].questionPrompt
+            Options = [data['Questions'][i].optionOne,data['Questions'][i].optionTwo,data['Questions'][i].optionThree,data['Questions'][i].optionFour]
+            Answer = data['Questions'][i].answer
 
-            objectQuestion = data[x];
+            question1['question'] =Question
+            question1['options'] =Options
+            question1['answer'] = Options.indexOf(Answer)            
 
-            for (i in objectQuestion) {
-                QNA.push(objectQuestion[i]);
-            }
-            console.log(QNA)
+            QNA.push(question1)
 
         }
+
+
+       // console.log(QNA)
+
     } catch (error) {
         //   showError
         // ('There is a problem retrieving books data, please try again later.<br />' + error)
     }
-
-    return QNA;
-}
-
-var displayarray = generateBoss();
+});
 
 
 const questionText = document.querySelector(".question-text");
@@ -57,35 +62,40 @@ let interval;
 
 //questions and options and answer and answer description
 //array of objects
-myApp = [{
-        question: "Which organ belongs to the Digestive System:",
-        options: ["Thymus", "Stomach", "Heart", "Trachea"],
-        answer: 1,
+asdasd = [{
+        question: "What is the percent of children's social security card stolen?",
+        options: ["15%","5%","20%","10%"],
+        answer: 3,
     },
     {
-        question: "Adults have fewer bones than babies do:",
-        options: ["true", "false"],
-        answer: 0,
-        description: "Lots of bones start out as several fragments at birth,then fuse together into a single bone later in life"
-    },
-    {
-        question: "Our human body has.........",
-        options: ["206 bones", "210 bones", "306 bones", "706 bones"],
+        question: "Is fixing your cards and stuff from a stolen identitty time consuming?",
+        options: ["Yes","No","Maybe","Don't know"],
         answer: 0,
     },
     {
-        question: "Your fingernails and hair keep growing after you die.",
-        options: ["true", "false"],
-        answer: 1,
-        description: "They really don't"
+        question: "Should you be aware of your payments on your debit of credit card?",
+        options: ["Yes","No","Maybe","Don't know"],
+        answer: 0,
     },
     {
-        question: "One important function of bones is to produce.",
-        options: ["tendons", "ligaments", "blood cells", "cartilage"],
-        answer: 2,
+        question: "How much time could you spend time in jail for identity theft?",
+        options: ["1 year","1 month","3 years","5 years"],
+        answer: 3,
+    },
+    {
+        question: "How many people have their identity stolen?",
+        options: ["1 million","5 million","10 million","15 million"],
+        answer: 3,
+    },
+    {
+        question: "What is not a way to prevent identity theft?",
+        options: ["Ignore email scams","Don't give out your social security number","Stay away from computer viruses","Carry your social security card with you all the time"],
+        answer: 3,
     }
 
 ]
+
+myApp = QNA
 
 function load() {
     number++;
