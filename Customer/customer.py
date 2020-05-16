@@ -16,22 +16,25 @@ class Customer(db.Model):
     __tablename__ = 'customer'
 
     username = db.Column(db.String(50), primary_key=True)
-    password = db.Column(db.String(50), primary_key=True)
+    password = db.Column(db.String(50), primary_key=False)
     postalcode = db.Column(db.String(50), nullable=False)
     accountID = db.Column(db.String(50), nullable=False)
+    points = db.Column(db.Integer)
 
     def __init__(self, username,password ,postalcode, accountID):
         self.username = username
         self.postalcode = postalcode
         self.password = password
         self.accountID = accountID
+        self.points = 0
 
     def json(self):
         customer_entry = {
             "username": self.username,
             "password": self.password,
             "postalcode": self.postalcode,
-            "accountID": self.accountID
+            "accountID": self.accountID,
+            "points" : self.points
         }
         return customer_entry
 
@@ -82,6 +85,11 @@ class accCb(db.Model):
 def get_all():
     return jsonify({"Customers": [customer.json() for customer in Customer.query.all()]})
 
+    
+@app.route("/newCustomer", methods=['POST'])
+def get_all():
+    return jsonify({"Customers": [customer.json() for customer in Customer.query.all()]})
+
 # retrieve a particular customer   
 @app.route("/getCustomer/<string:postalcode>", methods=["GET"])
 @cross_origin(supports_credentials=True)
@@ -91,6 +99,14 @@ def getCustomer(accountID):
         return jsonify({"CustomerParticulars":[cb.json() for cb in All_CB ]}), 200
     else: 
         return jsonify(False), 404
+
+# update points  
+@app.route("/updatePoints/<string:username>/<int:points>", methods=['PUT'])
+def updatePoints(username, points):
+    cust = Customer.query.get(username)
+    cust.points -= points
+    db.session.commit()
+    return jsonify(True)
 
 # Creating a new Customer Record , not sure how the data gonna be passed 
 # rmb account id is created ussing UUID lmk who is doing this i can provide the code 

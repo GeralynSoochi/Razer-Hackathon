@@ -7,7 +7,6 @@ import requests
 
 app = Flask(__name__)
 
-
 @app.route("/getSpawnDate/<string:region>") 
 def getSpawnDate(region): 
     r = requests.get("http://localhost:5004/getSpawnDate/" + region).json()
