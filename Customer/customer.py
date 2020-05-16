@@ -21,7 +21,7 @@ class Customer(db.Model):
     postalCode = db.Column(db.String(50), nullable=False)
     accountID = db.Column(db.String(50), primary_key=True)
     points = db.Column(db.Integer)
-    encodedKey = db.Column(db.String(50), nullable=False)
+    encodedKey = db.Column(db.String(100), nullable=False)
 
 
     def __init__(self,accountID, username, password ,postalCode, encodedKey):
@@ -38,7 +38,7 @@ class Customer(db.Model):
             "password": self.password,
             "postalcode": self.postalCode,
             "accountID": self.accountID,
-            "points" : self.points
+            "points" : self.points,
             "encodedKey" : self.encodedKey
         }
         return customer_entry
