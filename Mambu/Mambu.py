@@ -34,7 +34,7 @@ def registration():
         "postalCode" : postalCode,
         "encodedKey" : clientID
     }
-    r = requests.post ("http://localhost:5001/newCustomer/" + accountID, json= body)
+    r = requests.post ("http://54.169.136.72:5001/newCustomer/" + accountID, json= body)
     print (r.status_code)
     return jsonify("True")
 

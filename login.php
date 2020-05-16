@@ -177,7 +177,7 @@
                 };
 
 
-				var serviceURL = "http://localhost:5001/authC/" + username;
+				var serviceURL = "http://54.169.136.72:5001/authC/" + username;
                           
                 var requestParam = {
                     headers: {  "Content-Type": "application/json" },
@@ -203,7 +203,7 @@
 					var loc =  window.location.pathname;
 					var dir = loc.substring(0, loc.lastIndexOf('/'));
 
-					window.location.href = "http://localhost/"+ dir + "/index.php?username=" + username;
+					window.location.href = "http://54.169.136.72/"+ dir + "/index.php?username=" + username;
 						
 						
 				}else{
