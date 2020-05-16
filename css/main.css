@@ -200,7 +200,7 @@ iframe {
 .txt2 {
     font-family: Poppins-Regular;
     font-size: 15px;
-    color: #57b846;
+    color:  #6d7fcc;
     line-height: 1.5;
 }
 
@@ -319,7 +319,7 @@ iframe {
     -o-transition: all 0.4s;
     -moz-transition: all 0.4s;
     transition: all 0.4s;
-    background: #57b846;
+    background:  #6d7fcc;
 }
 
 .focus-input100::after {
@@ -570,7 +570,7 @@ iframe {
     text-align: center;
     text-transform: uppercase;
     text-rendering: optimizeLegibility;
-    color: #90EE90;
+    color:  #6d7fcc;
 }
 
 
@@ -682,7 +682,7 @@ iframe {
 #myBar {
     width: 10%;
     height: 30px;
-    background-color: #4CAF50;
+    background-color:  #6d7fcc;
     text-align: center;
     line-height: 30px;
     color: white;
