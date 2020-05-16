@@ -35,7 +35,7 @@ def registration():
     }
     r = requests.post ("http://localhost:5001/newCustomer/" + accountID, json= body)
     print (r.status_code)
-    return jsonify(True)
+    return jsonify("True")
 
 def create_client(firstName, lastName, assignedBranchKey, validUntil, documentId, postalCode, id):  
     clientURL = "https://razerhackathon.sandbox.mambu.com/api/clients"  
@@ -100,4 +100,4 @@ def getUserAccs(username):
     return jsonify(response)
 
 if __name__ == '__main__':
-    app.run(port=5015, debug=True)
+    app.run(host="0.0.0.0",port=5015, debug=True)
