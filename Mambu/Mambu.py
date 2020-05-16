@@ -111,6 +111,7 @@ def getDetails(userid):
     'Authorization': 'Basic VGVhbTE2OnBhc3MxRjNFN0E3MkU=',
     'Cookie': 'AWSALB=SCyLu8+OuTImLlfP1eh8nql91Ct7//I2pMraeyFdy6nAq9oO2gfqwYQpcALP/X7oW9Z48YY6yPK2VZb4dF/whA21klZ3Qi3vs3BU6uZ9nNyWhQwxPOqO1KKTaoIz; AWSALBCORS=SCyLu8+OuTImLlfP1eh8nql91Ct7//I2pMraeyFdy6nAq9oO2gfqwYQpcALP/X7oW9Z48YY6yPK2VZb4dF/whA21klZ3Qi3vs3BU6uZ9nNyWhQwxPOqO1KKTaoIz'
     }
+    print(type(userid))
     response = requests.get(getAccURL + userid, headers=headers)
     response = response.json()
     print(response)
