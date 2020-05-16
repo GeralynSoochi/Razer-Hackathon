@@ -104,6 +104,13 @@ def getCustomer(accountID):
     else: 
         return jsonify(False), 404
 
+@app.route("/addPoints/<string:username>/<int:points>", methods=['PUT'])
+def updatePoints(username, points):
+    cust = Customer.query.get(username)
+    cust.points += points
+    db.session.commit()
+    return jsonify(True)
+
 # update points  
 @app.route("/updatePoints/<string:username>/<int:points>", methods=['PUT'])
 def updatePoints(username, points):
