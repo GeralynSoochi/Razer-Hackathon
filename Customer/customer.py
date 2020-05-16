@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
 import json
-import basehash
+from passlib.hash import sha256_crypt
 
 
 # ==================================== CONNECTION SPECIFICATION ====================================== #
@@ -13,8 +13,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 CORS(app)
 
-hash_fn = basehash.base36()  
-
 class Customer(db.Model):
     __tablename__ = 'customer'
 
@@ -23,14 +21,16 @@ class Customer(db.Model):
     postalCode = db.Column(db.String(50), nullable=False)
     accountID = db.Column(db.String(50), primary_key=True)
     points = db.Column(db.Integer)
+    encodedKey = db.Column(db.String(50), nullable=False)
 
 
-    def __init__(self,accountID, username, password ,postalCode):
+    def __init__(self,accountID, username, password ,postalCode, encodedKey):
         self.accountID = accountID
         self.username = username
         self.password = password
         self.postalCode = postalCode
         self.points = 0
+        self.encodedKey = encodedKey
 
     def json(self):
         customer_entry = {
@@ -39,6 +39,7 @@ class Customer(db.Model):
             "postalcode": self.postalCode,
             "accountID": self.accountID,
             "points" : self.points
+            "encodedKey" : self.encodedKey
         }
         return customer_entry
 
@@ -55,7 +56,7 @@ def newCustomer(accountID):
         return jsonify({"message": "An accountID with '{}' already exists.".format(accountID)}), 400
 
     data = request.get_json()
-    customer = Customer(accountID, data['username'], hash_fn.hash(data['password']), data['postalCode'])
+    customer = Customer(accountID, data['username'], sha256_crypt.hash(data['password']), data['postalCode'], data['encodedKey'])
     try:
         db.session.add(customer)
         db.session.commit()
@@ -65,13 +66,23 @@ def newCustomer(accountID):
 
     return jsonify({"success": "Account successfully created"}), 201
 
-# retrieve a particular customer   
-@app.route("/getCustomer/<string:postalcode>", methods=["GET"])
+# retrieve a particular customer by postal code 
+# @app.route("/getCustomer/<string:postalcode>", methods=["GET"])
+# @cross_origin(supports_credentials=True)
+# def getCustomer(accountID):
+#     All_CB = Customer.query.filter_by(accountID=accountID).all()
+#     if All_CB:
+#         return jsonify({"CustomerParticulars":[cb.json() for cb in All_CB ]}), 200
+#     else: 
+#         return jsonify(False), 404
+
+# retrieve a particular customer by postal code 
+@app.route("/getCustomer/<string:accountid>", methods=["GET"])
 @cross_origin(supports_credentials=True)
 def getCustomer(accountID):
-    All_CB = Customer.query.filter_by(accountID=accountID).all()
+    All_CB = Customer.query.filter_by(accountID=accountID).first()
     if All_CB:
-        return jsonify({"CustomerParticulars":[cb.json() for cb in All_CB ]}), 200
+        return jsonify(All_CB.json()), 200
     else: 
         return jsonify(False), 404
 
@@ -107,7 +118,7 @@ def authC(username):
     user = Customer.query.filter_by(username=username).first()
     if user:
         password = (Customer.query.filter_by(username=username).first().password)
-        password = hash_fn.unhash(password)
+        password = sha256_crypt.unhash(password)
         
         if str(password) == str(inputpassword):
             return jsonify({"message": "True"}), 200

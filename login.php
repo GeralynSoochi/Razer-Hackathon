@@ -78,10 +78,10 @@
 
 
 	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100 p-t-85 p-b-20">
+		<div class="container-login100 custom-box">
+			<div class="wrap-login100 p-t-85 p-b-20 custom-box">
 				<form class="login100-form validate-form">
-					<span style='color:#90EE90' id="crowd">
+					<span style='color:#6d7fcc' id="crowd">
 						FAT
 					</span> 
 					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
@@ -95,7 +95,7 @@
 					</div>
 
 					<div   class="container-login100-form-btn">
-						<button id="loginBtn" style='background-color:#90EE90' type='button' class="login100-form-btn">
+						<button id="loginBtn" style='background-color:#6d7fcc' type='button' class="login100-form-btn">
 							Login
 						</button>
 					</div>
@@ -122,7 +122,7 @@
 								Don’t have an account?
 							</span>
 
-							<a href="./register.html" class="txt2">
+							<a href="./register.php" class="txt2">
 								Sign up
 							</a>
 						</li>
@@ -171,8 +171,6 @@
                 var password = $('#password').val();
                 var username = $('#username').val();
 
-				// hashing is here 
-			
 
                 var requestBody = {
                     "password": password

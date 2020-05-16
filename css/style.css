@@ -56,12 +56,12 @@ p
     }
 .navbar-default .navbar-nav li a:hover
     {
-        color: #93ca3a;
+        color:  #6d7fcc;
     }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-  color: #93ca3a;
+  color:  #6d7fcc;
   background-color: transparent;
 }
 .navbar-default .navbar-toggle
@@ -71,7 +71,7 @@ p
     }
 .navbar-default .navbar-toggle .icon-bar
     {
-        background: #93ca3a;
+        background:  #6d7fcc;
         border-color: transparent;
     }
 .navbar-default .navbar-toggle:hover,
@@ -138,7 +138,7 @@ p
 }
 .flexslider .btn
 {
-    background: #93ca3a;
+    background:  #6d7fcc;
     border-radius: 0;
     border: 2px solid transparent;
     color: #FFFFFF;
@@ -153,7 +153,7 @@ p
 .flexslider .btn:hover,
 .flexslider .btn:focus {
     background: #fff;
-    color: #93ca3a;
+    color:  #6d7fcc;
     border: 2px solid transparent;
 }
 
@@ -204,7 +204,7 @@ p
 /* start about */
 #about h3
     {
-        color: #93ca3a;
+        color:  #6d7fcc;
         font-size: 40px;
         padding-bottom: 10px;
     }
@@ -220,7 +220,7 @@ p
     }
 #about .progress .progress-bar-danger
     {
-        background: #93ca3a;
+        background:  #6d7fcc;
     }
 #about .text-top
     {
@@ -306,7 +306,7 @@ p
     }
 #newsletter input[type="submit"]
     {
-        background: #93ca3a;
+        background:  #6d7fcc;
         border: 2px solid transparent;
         color: #ffffff;
     }
@@ -365,7 +365,7 @@ p
 #pricing .plan .plan_title
   {
     border-bottom: 1px solid #f6f6f6;
-    color: #9bc848;
+    color:  #6d7fcc;
     font-size: 30px;
     padding: 20px;
   }
@@ -380,7 +380,7 @@ p
   }
 #pricing .plan .btn
   {
-    background: #93ca3a;
+    background:  #6d7fcc;
     border: none;
     border-radius: 2px;
     font-weight: bold;
@@ -393,7 +393,7 @@ p
 #pricing .plan .btn:hover
   {
     background: #FFFFFF;
-    color: #66AF33;
+    color:  #6d7fcc;
   }
 /* end pricing */
 
@@ -513,7 +513,7 @@ p
     }
 #contact .fa
     {
-        color: #93ca3a;
+        color:  #6d7fcc;
         font-size: 18px;
         padding-bottom: 14px;
     }
@@ -537,7 +537,7 @@ p
     }
 #contact input[type="submit"]:hover
     {
-        background: #93ca3a;
+        background:  #6d7fcc;
     }
  #contact .form-control::-moz-placeholder {
   color: #666;
