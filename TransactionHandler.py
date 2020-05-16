@@ -9,7 +9,8 @@ app = Flask(__name__)
 CORS(app)
 
 
-# Create a new Trnsactions 
+# Create a new Trnsactions - Transfer
+# Create a new Trnsactions - Deposit
 @app.route("/createNewTransaction/<string:accountID>", methods=['POST'])
 @cross_origin(supports_credentials=True)
 def createNewTransaction(accountID):
