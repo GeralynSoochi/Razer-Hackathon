@@ -13,8 +13,8 @@
         integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
     <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="stylequiz.css"/>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="stylequiz.css" />
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"

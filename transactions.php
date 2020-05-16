@@ -93,27 +93,115 @@ if(isset($_SESSION['username'])){
                 </div>
             </nav>
 
-            <h2>Transactions</h2>
+            <h2>Transactions Wallet</h2>
 
-            <div class="w3-container w3-content" style="max-width:1400px;margin-top:20px">
+            <div class="w3-container w3-content" style="max-width:1400px;margin-top:20px">    
+
                 <!-- The Grid -->
                 <div class="w3-row">
-                    <!-- Left Column -->
-                    <div class="w3-col m4">
+                  <!-- Left Column -->
+                  <div class="w3-col m6">
+              
+                    <!--  --> 
+                    <div class="w3-card w3-round w3-white">
+                      <div class="w3-container w3-padding">
+                       <h5>Inflow & Outflow</h5>
+              
+                        <br>
 
-                        <!--  -->
+                        <table class="w3-table w3-bordered">
+
+                        
+                        <tbody id="TransContainer" style="display: block; height: 800px; overflow-y: scroll">
+      
+                        </tbody>
+		
+                        
+                        </table>
+                        <br>
+                        
+                      </div>
+                    </div>
+                    <br>
+               
+                  <!-- End Left Column -->
+                  </div>
+                  
+                  <!-- Right Column -->
+                  <div class="w3-col m4">
+                  
+                    <div class="w3-row-padding">
+              
+                      <div class="w3-col m12">
+                      <!-- Savings -->
                         <div class="w3-card w3-round w3-white">
-                            <div class="w3-container w3-padding">
-                                <h5></h5>
+                          <div class="w3-container w3-padding">
+                          <h5>Savings</h5>
+                            <fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
+                            <div data-role = "fieldcontain">
+              
+                            <label id="balanceContainer"></label>
+                            <script>    
 
+                            // retrieve particular info 
+                                $(async() => {
+                                    var serviceURL = "http://localhost:5044/getOverallSavingAccount/" + accountID; 
+                                    // to make the post + lmk ill send code 
+                                    try {
+                                        const response =
+                                        await fetch(serviceURL, { method: 'GET' });
+                                        const data = await response.json();
+                                        console.log(data)
+                                        //console.log(data['0'].amount)
+                                          var printrow1 = "<h6>Your Account Balance : <b>"+ data.balance +"</b> </h6>"
+                                        $("#balanceContainer").append(printrow1)
+                                    
 
+                                    } catch (error) {
+                                      //  showError
+                                           // ('There is a problem retrieving books data, please try again later.<br />' + error)
+                                    }
+                                });
+                                </script>
+              
+                             <script>    
 
-                                <br><br>
-
-                                <div id='TransContainer' class="w3-responsive">
-
-                                </div>
-
+                            // retrieve particular info 
+                                $(async() => {
+                                    var serviceURL = "http://localhost:5001/getPoints/" + accountID; 
+                                    // to make the post + lmk ill send code 
+                                    try {
+                                        const response =
+                                        await fetch(serviceURL, { method: 'GET' });
+                                        const data = await response.json();
+                                        console.log(data)
+                                        //console.log(data['0'].amount)
+                                        var printrow1 = "<h6>Your Points Balance : <b>"+ data.points +"</b> </h6>"
+                                        $("#balanceContainer").append(printrow1)
+                                    
+                                        
+                                    } catch (error) {
+                                      //  showError
+                                           // ('There is a problem retrieving books data, please try again later.<br />' + error)
+                                    }
+                                });
+                                </script>
+                            
+                            </div>
+                            
+                            <br>
+                            <div>
+                            <select id='type'>
+                                <option value='Transfer'>Transfer</option>
+                                <option value='Deposit'>Deposit</option>
+                            </select>
+                            </div>
+                            <div>
+                            <input type='text' id='Amount' name='DepositAmount' placeholder='DepositAmount'>
+                            </div>
+                            <div>
+                            <input type='text' id='accountno' name='accountno' placeholder='Transfer Account Here'>
+                            <button id="TransactionBtn" value="Transfer" class="w3-button rounded-pill">Deposit</button>
                             </div>
                         </div>
                         <br>
