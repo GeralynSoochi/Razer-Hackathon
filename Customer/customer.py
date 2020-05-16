@@ -76,6 +76,17 @@ def newCustomer(accountID):
 #     else: 
 #         return jsonify(False), 404
 
+@app.route("/getCustomerAID/<string:username>", methods=["GET"])
+@cross_origin(supports_credentials=True)
+def getCustomerbyUseranme(username):
+    userd = Customer.query.filter_by(username=username).first()
+    if userd:
+        return jsonify(userd.json()), 200
+    else: 
+        return jsonify(False), 404
+
+
+# retrieve a particular customer by postal code 
 # retrieve a particular customer 
 @app.route("/getCustomer/<string:customerid>", methods=["GET"])
 @cross_origin(supports_credentials=True)

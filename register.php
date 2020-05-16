@@ -47,7 +47,7 @@
 			<div class="wrap-login100 p-t-85 p-b-20 custom-box">
 				<form class="login100-form validate-form">
 					<span style='color: #6d7fcc' id="crowd">
-						B.Y Solutions
+						FAT
 					</span> 
                     <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
 						<input id="username" class="input100" type="text" name="username" placeholder="Username" />
@@ -73,12 +73,7 @@
                         <!--<span class="focus-input100" data-placeholder="Password"></span> -->
                         <!-- <input type="text" id="lastname"> -->
                     </div>
-                    
-                    <div class="wrap-input100 validate-input m-b-50">
-						<input id="assignedBranchKey" class="input100" type="text" name="pass"  placeholder="AssignedBranchKey"  />
-                        <!--<span class="focus-input100" data-placeholder="Password"></span> -->
-                        <!-- <input type="text" id="assignedBranchKey"> -->
-                    </div>
+                
                     
                     <div class="wrap-input100 validate-input m-b-50">
 						<input id="validUntil" class="input100" type="text" name="pass"  placeholder="validUntil"  />
@@ -138,7 +133,6 @@
                         "password" : password,
                         "firstName": firstName,
                             "lastName": lastName,
-                            "assignedBranchKey": '',
                             "validUntil": validUntil,
                             "documentId" :documentId,
                             "postalCode" : postalCode
@@ -177,7 +171,7 @@
                 var loc =  window.location.pathname;
                 var dir = loc.substring(0, loc.lastIndexOf('/'));
                 // change to ip
-                //window.location.href = "http://localhost"+ dir + "/login.php?msg=success";
+                window.location.href = "http://localhost"+ dir + "/login.php?msg=success";
                     
             }else{
               //  showError(authenticated)
