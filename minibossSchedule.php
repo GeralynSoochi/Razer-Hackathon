@@ -32,11 +32,48 @@
 
         </div>
 
+        <div id='m'>monday:
+
+
+
+
+        </div><br/>
+
+
+        <div id='t'>Tuesday:
+
+
+            
+
+        </div><br/>
+        <div id='w'>Wednesday:
+
+
+            
+
+        </div><br/>
+        <div id='th'>Thursday:
+
+
+                    
+
+        </div><br/>
+        <div id='fr'>Friday:
+                    
+
+        </div><br/>
+        <div id='sat'>Saturday:
+
+
+                    
+
+        </div><br/>
         <div id='bossdates'>
 
 
-        </div>
+                    
 
+        </div>
     <script>
     // user username 
     // get postalcode -> user region
@@ -132,41 +169,46 @@
 
         console.log(spawnDate) // array 
         spawnDate = spawnDate.split(',');
-        var happen = "";
+        
 
         for(var i = 0 ; i < spawnDate.length; i++ ){
+
+            var happen = "";
             console.log(spawnDate[i])
             switch(spawnDate[i]){
 
 
-            case '0': happen += "<p>BOSS is ON MONDAY</p>"
+            case '0': happen +="#m"
                 break;
             
-            case '1': happen += "<p>BOSS is ON TUESDAY</p>"
+            case '1': happen += "#t"
                 break;
             
-            case '2': happen += "<p>BOSS is ON WEDNESDAY</p>"
+            case '2': happen += "#w"
                 break;
             
-            case '3': happen += "<p>BOSS is ON THURSDAY</p>"
+            case '3': happen += "#th"
                 break;
             
-            case '4': happen += "<p>BOSS is ON FRIDAY</p>"
+            case '4': happen += "#f"
                 break;
             
-            case '5': happen += "<p>BOSS is ON SATURDAY</p>"
+            case '5': happen += "#s"
                 break;
             
             default: 
 
             }
 
+            
+        var icon ="<div>icon</div>";
+
+        $(happen).append(icon)
 
 
         }
-        console.log("This is happen: "+happen)
-        
-        $("#bossdates").append(happen)
+        //
+       // $("#bossdates").append(happen)
 
 
 
