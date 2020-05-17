@@ -36,7 +36,7 @@
             }
             $_SESSION['username'] = $_GET['username'];
         }else{
-            // have to relogging 
+            header("Location: login.php");
         }
     ?>
 </head>
