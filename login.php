@@ -200,10 +200,10 @@
 					//save username is javascript session
 					sessionStorage.setItem("username",username)
 					// console.log(sessionStorage.getItem("username"))
-					var loc =  window.location.pathname;
-					var dir = loc.substring(0, loc.lastIndexOf('/'));
+					// var loc =  window.location.pathname;
+					// var dir = loc.substring(0, loc.lastIndexOf('/'));
 
-					window.location.href = "http://54.169.136.72/"+ dir + "/index.php?username=" + username;
+					window.location.href = "http://54.169.136.72/app/index.php?username=" + username;
 						
 						
 				}else{

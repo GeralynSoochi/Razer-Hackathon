@@ -171,7 +171,7 @@
                 var loc =  window.location.pathname;
                 var dir = loc.substring(0, loc.lastIndexOf('/'));
                 // change to ip
-                window.location.href = "http://54.169.136.72"+ dir + "/login.php?msg=success";
+                window.location.href = "http://54.169.136.72/app/login.php?msg=success";
                     
             }else{
               //  showError(authenticated)
