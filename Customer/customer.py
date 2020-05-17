@@ -99,7 +99,8 @@ def getCustomer(customerid):
 
 @app.route("/addPoints/<string:accountID>/<int:points>", methods=['PUT'])
 def addPoints(accountID, points):
-    cust = Customer.query.get(accountID)
+    cust = Customer.query.filter_by(accountID=accountID).first()
+    print(cust)
     cust.points += points
     db.session.commit()
     return jsonify(True)
