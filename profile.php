@@ -73,7 +73,7 @@
                             <a href="rewards.php">Rewards</a>
                         </li>
                         <li>
-                            <a href=#>Vouchers</a>
+                            <a href="vouchers.html">Vouchers</a>
                         </li>
 
                     </ul>
