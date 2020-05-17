@@ -2,5 +2,5 @@ FROM python:3
 WORKDIR /usr/src/app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
-COPY ./customer.py .
-CMD [ "python", "./customer.py" ]
+COPY ./TransactionHandler.py .
+CMD [ "python", "./TransactionHandler.py" ]
