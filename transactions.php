@@ -166,52 +166,7 @@ header("Location: login.php");
                             <div data-role = "fieldcontain">
               
                             <label id="balanceContainer"></label>
-                            <script>    
-
-                            // retrieve particular info 
-                                $(async() => {
-                                    var serviceURL = "http://54.169.136.72:5044/getOverallSavingAccount/" + accountID; 
-                                    // to make the post + lmk ill send code 
-                                    try {
-                                        const response =
-                                        await fetch(serviceURL, { method: 'GET' });
-                                        const data = await response.json();
-                                        console.log(data)
-                                        //console.log(data['0'].amount)
-                                          var printrow1 = "<h6>Your Account Balance : <b>"+ data.balance +"</b> </h6>"
-                                        $("#balanceContainer").append(printrow1)
-                                    
-
-                                    } catch (error) {
-                                      //  showError
-                                           // ('There is a problem retrieving books data, please try again later.<br />' + error)
-                                    }
-                                });
-                                </script>
-              
-                             <script>    
-
-                            // retrieve particular info 
-                                $(async() => {
-                                    var serviceURL = "http://54.169.136.72:5001/getPoints/" + accountID; 
-                                    // to make the post + lmk ill send code 
-                                    try {
-                                        const response =
-                                        await fetch(serviceURL, { method: 'GET' });
-                                        const data = await response.json();
-                                        console.log(data)
-                                        //console.log(data['0'].amount)
-                                        var printrow1 = "<h6>Your Points Balance : <b>"+ data.points +"</b> </h6>"
-                                        $("#balanceContainer").append(printrow1)
-                                    
-                                        
-                                    } catch (error) {
-                                      //  showError
-                                           // ('There is a problem retrieving books data, please try again later.<br />' + error)
-                                    }
-                                });
-                                </script>
-                            
+                          
                             </div>
                             
                             <br>
@@ -228,6 +183,8 @@ header("Location: login.php");
                             <div>
                             <input class="form-control rounded-pill" type='text' id='accountno' name='accountno' placeholder='Transfer Account Here'>
                             <br>
+				<textarea id='notes' rows='5' cols='48' placeholder='Enter some comments here'></textarea><br />		
+
                             <button id="TransactionBtn" value="Transfer" class="w3-button w3-indigo rounded-pill">Deposit</button>
                             </div><br>
                         </div>
@@ -463,8 +420,10 @@ header("Location: login.php");
                     }
 
                 }
+		if(transaction.comment == '' || transaction.comment == 'undefined'){transaction.comment = "No Comments" }
 
                 if (positivetransfer == 1) {
+
                     var panel = `<tr><td><div 
                                 class="custom-box">
                                 <p style="color:black;"><br/>
@@ -635,7 +594,7 @@ header("Location: login.php");
             var loc = window.location.pathname;
             var dir = loc.substring(0, loc.lastIndexOf('/'));
             // change to ip
-            // window.location.href = "http://54.169.136.72"+ dir + "/transactions.php";
+             window.location.href = "http://54.169.136.72/app/transactions.php";
 
         } else {
             //  showError(authenticated)
