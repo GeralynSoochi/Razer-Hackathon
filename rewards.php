@@ -33,7 +33,7 @@
             if(isset($_SESSION['username'])){
                 $username = $_SESSION['username'];
             }else{
-		header("Location: login.php");
+                header("Location: login.php");
 
             }
 
@@ -163,13 +163,15 @@
             const data = await response.json();
             console.log(data.accountID)
             accountID = data.accountID
+            pts = data.points
             //console.log(data['0'].amount
 
         } catch (error) {
             //  showError
             // ('There is a problem retrieving books data, please try again later.<br />' + error)
         }
-        var serviceURL = "http://54.169.136.72:5022/retrieveRedeemableRewards/" + accountID
+        var serviceURL = "http://54.169.136.72:5022/retrieveRedeemableRewards/" + accountID;
+        var pcount = 0;
         try {
             const response = await fetch(serviceURL, {
                 method: 'GET',
@@ -180,16 +182,27 @@
             if(data.length > 0){
                 for(x in data){
                 var rewardAva  = data[x]
-
+                pcount+=1
+                ptid = "points"+pcount
+                rid = "rewardID"+pcount
                 var printrow1 = `<div><b>${rewardAva.item}<b>
-                            <input type='hidden' id='rewardID' value='${rewardAva.rewardID}'/>
-                            <input type='hidden' id='points' value='${rewardAva.rewardValue}'/>
-                            <button id='buttonredeem' onclick='buttonreddem()'>Redeem</button>
-                            </div>`
+                            <input type='hidden' id='${rid}' value='${rewardAva.rewardID}'/>
+                            <input type='hidden' id='${ptid}' value='${rewardAva.rewardValue}'/>`
+                
+                 printrow1 = printrow1 + "<button id='buttonredeem'  onclick='buttonreddem( " +  rewardAva.rewardID + "," +rewardAva.rewardValue + ")'>Redeem</button></div>"
             $("#rewardcontainer").append(printrow1)
             
 
             }
+            if (pts > 4000) {
+                var SCVal = 4000
+                pcount += 1
+                var name = "Scratch Card"
+                var printrow1 = `<div><b>Scratch Card<b>
+                            <input type='hidden' id='${pcount}' value='${SCVal}'/>`
+                    printrow1 = printrow1 + "<button id='buttonredeem' onclick='buttonreddem2(" + SCVal + ")'>Redeem</button></div>"
+            $("#rewardcontainer").append(printrow1)
+            
         
             }else{
 
@@ -202,7 +215,7 @@
            
   
 
-            }
+            }}
 
 
         catch (error) {
@@ -215,9 +228,9 @@
     <!-- redeem rewards button ss -->
     <script>
           
-         async function buttonreddem(event){
-        var rewardID = $('#rewardID').val();
-        var points = $('#points').val();
+         async function buttonreddem(rewardID, points){
+        // var rewardID = $('#rewardID').val();
+        // var points = $('#points').val();
         console.log("press")
 
         var serviceURL =
@@ -241,6 +254,7 @@
             //  showError
             // ('There is a problem retrieving books data, please try again later.<br />' + error)
         }
+
 
 
         var serviceURL2 = "http://54.169.136.72:5022/redeemRewards/" + accountID + "/" + rewardID + "/" + points;
@@ -273,7 +287,61 @@
         
 
     };
+    async function buttonreddem2(points){
+        // var points = $('#points').val();
+        console.log(points)
+        console.log("press")
 
+        var serviceURL =
+            "http://54.169.136.72:5001/getCustomerAID/" + username;
+        // to make the post + lmk ill send code 
+
+
+        try {
+            const response =
+                await fetch(serviceURL, {
+                    method: 'GET'
+                });
+            const data = await response.json();
+            console.log(data.accountID)
+            accountID = data.accountID
+            //console.log(data['0'].amount
+            
+
+
+        } catch (error) {
+            //  showError
+            // ('There is a problem retrieving books data, please try again later.<br />' + error)
+        }
+        
+
+
+        var serviceURL2 = "http://54.169.136.72:5001/updatePoints/" + accountID + "/" + points
+        try {
+            const response = await fetch(serviceURL2, {
+                method: 'PUT',
+                mode: 'cors'
+            });
+            const data = await response.json();
+
+            if(data){
+                // change to ip
+                window.location.href = "https://light.microsite.perxtech.io/game/2?token=9386f0405d58d08ed08598bbdfdce386c627e5a6df10949cc147ff5460ab33e5&redirect_uri=http://54.169.136.72///app/vouchers.php";
+                    
+            }
+
+        } catch (error) {
+            //   showError
+            // ('There is a problem retrieving books data, please try again later.<br />' + error)
+        }
+
+
+
+
+
+        
+
+    };
 
 
 
