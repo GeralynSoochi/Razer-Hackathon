@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Region Wars</title>
+    <title>Wallet</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
@@ -38,6 +38,7 @@ $username= '';
 if(isset($_SESSION['username'])){
     $username = $_SESSION['username'];
 }else{
+header("Location: login.php");
 
 }
 
@@ -56,13 +57,13 @@ if(isset($_SESSION['username'])){
             <ul class="list-unstyled components">
                 <p><?=$_SESSION['username'];?></p>
                 <li>
-                    <a href="profile.html">Profile</a>
+                    <a href="profile.php">Profile</a>
                 </li>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Games</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="index.php">Region Wars</a>
+                            <a href="gameboss.php">Region Wars</a>
                         </li>
                         <li>
                             <a href="minibossSchedule.php">Mini Boss Schedule</a>
@@ -77,7 +78,7 @@ if(isset($_SESSION['username'])){
                             <a href="rewards.php">Rewards</a>
                         </li>
                         <li>
-                            <a href=#>Vouchers</a>
+                            <a href="vouchers.php">Vouchers</a>
                         </li>
 
                     </ul>
