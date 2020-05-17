@@ -30,15 +30,7 @@
     <?php
     
     session_start();
-        $username = '';
-        if(isset($_GET['username'])){
-            if(isset($_SESSION['username'])){
-                unset($_SESSION['username']);
-            }
-            $_SESSION['username'] = $_GET['username'];
-        }else{
-            // have to relogging 
-        }
+
     ?>
 
 </head>

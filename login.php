@@ -203,7 +203,7 @@
 					// var loc =  window.location.pathname;
 					// var dir = loc.substring(0, loc.lastIndexOf('/'));
 
-					window.location.href = "http://54.169.136.72/app/index.php?username=" + username;
+					window.location.href = "http://54.169.136.72/app/profile.php?username=" + username;
 						
 						
 				}else{
