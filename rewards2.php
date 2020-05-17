@@ -33,6 +33,7 @@
             if(isset($_SESSION['username'])){
                 $username = $_SESSION['username'];
             }else{
+                header("Location: login.php");
 
             }
 
@@ -51,13 +52,13 @@
             <ul class="list-unstyled components">
                 <p><?=$_SESSION['username'];?></p>
                 <li>
-                    <a href="profile.html">Profile</a>
+                    <a href="profile.php">Profile</a>
                 </li>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Games</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="index.php">Region Wars</a>
+                            <a href="gameboss.php">Region Wars</a>
                         </li>
                         <li>
                             <a href="minibossSchedule.php">Mini Boss Schedule</a>
@@ -72,7 +73,7 @@
                             <a href=#>Rewards</a>
                         </li>
                         <li>
-                            <a href=#>Vouchers</a>
+                            <a href="vouchers.php">Vouchers</a>
                         </li>
 
                     </ul>
@@ -81,7 +82,8 @@
                     <a href="transactions.php">Wallet</a>
                 </li>
                 <li>
-                    <a href="#">Logout</a>
+                <img src="img/exit.png" class="logout-image">
+                    <a class="logout-text" href="./logout.php">Logout</a>
                 </li>
             </ul>
         </nav>
@@ -269,7 +271,7 @@
                 var loc = window.location.pathname;
                 var dir = loc.substring(0, loc.lastIndexOf('/'));
                 // change to ip
-                window.location.href = "http://54.169.136.72" + dir + "/rewards.php";
+                window.location.href = "http://54.169.136.72/app/rewards.php";
                     
             }
 
