@@ -46,7 +46,7 @@
             <ul class="list-unstyled components">
                 <p><?=$_SESSION['username'];?></p>
                 <li>
-                    <a href="profile.html">Profile</a>
+                    <a href="profile.php">Profile</a>
                 </li>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Games</a>
@@ -67,7 +67,7 @@
                             <a href="rewards.php">Rewards</a>
                         </li>
                         <li>
-                            <a href=#>Vouchers</a>
+                            <a href="vouchers.php">Vouchers</a>
                         </li>
 
                     </ul>

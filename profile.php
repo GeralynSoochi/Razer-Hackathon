@@ -50,7 +50,7 @@
             </div>
 
             <ul class="list-unstyled components">
-                <p>Joseph Lee</p>
+            <p><?=$_SESSION['username'];?></p>
                 <li>
                     <a href=#>Profile</a>
                 </li>
@@ -58,7 +58,7 @@
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Games</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="index.php">Region Wars</a>
+                            <a href="gameboss.php">Region Wars</a>
                         </li>
                         <li>
                             <a href="minibossSchedule.php">Mini Boss Schedule</a>
@@ -73,7 +73,7 @@
                             <a href="rewards.php">Rewards</a>
                         </li>
                         <li>
-                            <a href="vouchers.html">Vouchers</a>
+                            <a href="vouchers.php">Vouchers</a>
                         </li>
 
                     </ul>

@@ -37,24 +37,40 @@
             </div>
 
             <ul class="list-unstyled components">
-                <p>Joseph Lee</p>
+                <p><?=$_SESSION['username'];?></p>
                 <li>
-                    <a href="profile.html">Profile</a>
+                    <a href="profile.php">Profile</a>
                 </li>
                 <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Games</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href=#>Region Wars</a>
+                            <a href="gameboss.php">Region Wars</a>
                         </li>
-                       
+                        <li>
+                            <a href="minibossSchedule.php">Mini Boss Schedule</a>
+                        </li>
+
                     </ul>
                 </li>
                 <li>
-                    <a href="transactions.php">Transactions</a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Rewards</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="rewards.php">Rewards</a>
+                        </li>
+                        <li>
+                            <a href=#>Vouchers</a>
+                        </li>
+
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">How do I battle?</a>
+                    <a href="transactions.php">Wallet</a>
+                </li>
+                <li>
+                    <img src="img/exit.png" class="logout-image">
+                    <a class="logout-text" href="./logout.php">Logout</a>
                 </li>
             </ul>
         </nav>
@@ -62,12 +78,11 @@
         <!-- Page Content  -->
         <div id="content">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
-                        <span></span>
+                        <span>Toggle Menu</span>
                     </button>
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
@@ -76,9 +91,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     </div>
                 </div>
-            </nav>
+                <br>
 
-            <h2>My Vouchers</h2>
+                <img src="img/card.png" class="header-image">
+                <p class="header-text">Vouchers</p>
         
             <div class="line"></div>
 
