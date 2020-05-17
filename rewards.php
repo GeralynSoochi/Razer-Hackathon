@@ -82,7 +82,7 @@
                 </li>
                 <li>
                 <img src="img/exit.png" class="logout-image">
-                    <a class="logout-text" href="#">Logout</a>
+                    <a class="logout-text" href="./logout.php">Logout</a>
                 </li>
             </ul>
         </nav>
@@ -242,7 +242,7 @@
         }
 
 
-        var serviceURL2 = "http://54.169.136.72:5022/redeemRewards/" + accountID + "/" + rewardID + "/" + points
+        var serviceURL2 = "http://54.169.136.72:5022/redeemRewards/" + accountID + "/" + rewardID + "/" + points;
         try {
             const response = await fetch(serviceURL2, {
                 method: 'PUT',

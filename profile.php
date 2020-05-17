@@ -26,6 +26,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php
+    
+    session_start();
+        $username = '';
+        if(isset($_GET['username'])){
+            if(isset($_SESSION['username'])){
+                unset($_SESSION['username']);
+            }
+            $_SESSION['username'] = $_GET['username'];
+        }else{
+            // have to relogging 
+        }
+    ?>
 </head>
 
 <body>
@@ -48,7 +61,7 @@
                             <a href="index.php">Region Wars</a>
                         </li>
                         <li>
-                            <a href="minibossSchedule">Mini Boss Schedule</a>
+                            <a href="minibossSchedule.php">Mini Boss Schedule</a>
                         </li>
 
                     </ul>
@@ -60,7 +73,7 @@
                             <a href="rewards.php">Rewards</a>
                         </li>
                         <li>
-                            <a href=#>Vouchers</a>
+                            <a href="vouchers.html">Vouchers</a>
                         </li>
 
                     </ul>
@@ -70,7 +83,7 @@
                 </li>
                 <li>
                     <img src="img/exit.png" class="logout-image">
-                    <a class="logout-text" href="#">Logout</a>
+                    <a class="logout-text" href="./logout.php">Logout</a>
                 </li>
             </ul>
         </nav>

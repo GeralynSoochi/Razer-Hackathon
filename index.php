@@ -30,15 +30,7 @@
     <?php
     
     session_start();
-        $username = '';
-        if(isset($_GET['username'])){
-            if(isset($_SESSION['username'])){
-                unset($_SESSION['username']);
-            }
-            $_SESSION['username'] = $_GET['username'];
-        }else{
-            // have to relogging 
-        }
+
     ?>
 
 </head>
@@ -85,7 +77,7 @@
                 </li>
                 <li>
                     <img src="img/exit.png" class="logout-image">
-                    <a class="logout-text" href="#">Logout</a>
+                    <a class="logout-text" href="./logout.php">Logout</a>
                 </li>
             </ul>
         </nav>
