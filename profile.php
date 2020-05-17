@@ -61,7 +61,7 @@
                             <a href="index.php">Region Wars</a>
                         </li>
                         <li>
-                            <a href="minibossSchedule">Mini Boss Schedule</a>
+                            <a href="minibossSchedule.php">Mini Boss Schedule</a>
                         </li>
 
                     </ul>
